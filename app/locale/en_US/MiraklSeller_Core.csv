@@ -1,0 +1,7 @@
+"Are you sure you want to delete this Mirakl listing?","Deleting a listing also deletes its Mirakl related data from Magento.\n\nNo data will be deleted from your Mirakl account. To delete offers from Mirakl, contact your operator to access Mirakl documentation."
+"Are you sure you want to refresh this listing's products?","You must refresh products to identify the products and offers that need to be exported, and include them in your listing. You can then export the listing to Mirakl."
+"Are you sure you want to export prices & stocks for this listing?","You are about to execute an export. This will send all prices & stocks from the current listing to Mirakl."
+"Are you sure you want to export products for this listing?","You are about to execute an export. This will send all new products and products in error status from the current listing to Mirakl."
+"Are you sure you want to update this Mirakl products export tracking?","You are about to update the export tracking for the selected products export. This will also retrieve available error files if any."
+"Are you sure you want to update this Mirakl prices & stocks export tracking?","You are about to update the export tracking for the selected prices & stocks export. This will also retrieve available error files if any."
+"Are you sure you want to clear this Mirakl listing?","You are about to clear the listing. All products and offers' synchronization status will be lost.\nRefresh the listing to reload the products and offers' status to be able to export them again to Mirakl."

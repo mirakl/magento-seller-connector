@@ -1,0 +1,25 @@
+<?php
+$_processConfig = Mage::helper('mirakl_seller_process/config');
+?>
+<?php if ($_processConfig->isAutoAsyncExecution() || $_processConfig->getTimeoutDelay()): ?>
+<script type="text/javascript">
+//<![CDATA[
+function MiraklSellerAsyncProcess()
+{
+    new Ajax.Request('<?php echo $this->getUrl('*/mirakl_seller_process/async') ?>', {
+        loaderArea: false,
+        onComplete: function(transport) {
+            if (console && 200 === transport.status) {
+                console.log('[Mirakl Seller] ' + transport.responseText);
+                Element.hide('loading-mask');
+            }
+            setTimeout(MiraklSellerAsyncProcess, 2 * 60 * 1000); // Wait 2 minutes before another call
+        }
+    });
+}
+document.observe('dom:loaded', function () {
+    MiraklSellerAsyncProcess();
+});
+//]]>
+</script>
+<?php endif ?>

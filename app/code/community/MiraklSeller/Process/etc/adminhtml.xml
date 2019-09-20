@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <mirakl_seller>
+            <children>
+                <processes translate="title" module="mirakl_seller_process">
+                    <title>Processes</title>
+                    <action>adminhtml/mirakl_seller_process/list</action>
+                    <sort_order>110</sort_order>
+                </processes>
+                <config>
+                    <title>Configuration</title>
+                    <sort_order>100</sort_order>
+                    <action>adminhtml/system_config/edit/section/mirakl_seller_process</action>
+                    <children>
+                        <mirakl_seller_process translate="title" module="mirakl_seller_process">
+                            <title>Processes</title>
+                            <action>adminhtml/system_config/edit/section/mirakl_seller_process</action>
+                            <sort_order>50</sort_order>
+                        </mirakl_seller_process>
+                    </children>
+                </config>
+            </children>
+        </mirakl_seller>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <mirakl_seller>
+                        <children>
+                            <processes translate="title" module="mirakl_seller_process">
+                                <title>Processes</title>
+                                <sort_order>110</sort_order>
+                            </processes>
+                        </children>
+                    </mirakl_seller>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mirakl_seller_process>
+                                        <title>Mirakl Processes Configuration</title>
+                                    </mirakl_seller_process>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

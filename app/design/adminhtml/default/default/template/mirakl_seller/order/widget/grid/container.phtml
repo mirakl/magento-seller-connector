@@ -1,0 +1,66 @@
+<?php
+/** @var MiraklSeller_Sales_Block_Adminhtml_Order_List $this */
+$connections = $this->getConnections();
+$currentConnection = $this->getCurrentConnection();
+$pendingOrdersCount = $this->getPendingOrdersCount();
+$incidentOrdersCount = $this->getOrdersWithIncidentCount();
+?>
+
+<?php if ($currentConnection->getId()): ?>
+    <p class="switcher"><label for="connection_switcher"><?php echo $this->__('Choose Connection:') ?></label>
+        <select name="connection_switcher" id="connection_switcher" class="left-col-block" onchange="return switchConnection(this);">
+            <?php foreach ($connections as $_connection): ?>
+                <?php /** @var MiraklSeller_Api_Model_Connection $_connection */ ?>
+                <option value="<?php echo $_connection->getId() ?>" <?php if ($_connection->getId() == $currentConnection->getId()): ?>selected="selected"<?php endif ?>><?php echo $this->escapeHtml($_connection->getName()) ?></option>
+            <?php endforeach; ?>
+        </select>
+    </p>
+<?php endif ?>
+
+<?php echo $this->getChildHtml('messages') ?>
+
+<div class="entry-edit">
+    <div class="fieldset">
+        <ol>
+            <li><span class="dashboard-success"><?php echo $this->__('Orders waiting for your acceptance: '); ?></span><a href="#" title="<?php echo $this->escapeHtml($this->__('Filter by orders waiting for your acceptance')) ?>" onclick="addOrdersGridFilter('<?php echo \Mirakl\MMP\Common\Domain\Order\OrderState::WAITING_ACCEPTANCE ?>');"><strong><?php echo $this->__('%s order%s', $pendingOrdersCount, $pendingOrdersCount > 1 ? 's' : ''); ?></strong></a></li>
+            <li><span class="dashboard-success"><?php echo $this->__('Orders with opened incident: '); ?></span><a href="#" title="<?php echo $this->escapeHtml($this->__('Filter by orders having opened incidents')) ?>" onclick="addOrdersWithIncidentGridFilter();"><strong><?php echo $this->__('%s order%s', $incidentOrdersCount, $incidentOrdersCount > 1 ? 's' : ''); ?></strong></a></li>
+        </ol>
+    </div>
+</div>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    function switchConnection(obj) {
+        var connectionParam = obj.value ? 'connection_id/' + obj.value + '/' : '';
+        setLocation('<?php echo $this->getSwitchUrl() ?>' + connectionParam);
+    }
+
+    function addOrdersGridFilter(status) {
+        var element = $('MiraklOrdersGrid_order_filter_status');
+        element.value = status;
+        var elements = [element];
+        reloadOrdersGrid(elements);
+    }
+
+    function addOrdersWithIncidentGridFilter() {
+        var element = $('MiraklOrdersGrid_order_filter_has_incident');
+        element.value = '1';
+        var elements = [element];
+        reloadOrdersGrid(elements);
+    }
+
+    function reloadOrdersGrid(elements) {
+        MiraklOrdersGridJsObject.reload(MiraklOrdersGridJsObject.addVarToUrl(MiraklOrdersGridJsObject.filterVar, encode_base64(Form.serializeElements(elements))));
+    }
+    //]]>
+</script>

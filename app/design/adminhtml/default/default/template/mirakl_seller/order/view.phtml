@@ -1,0 +1,253 @@
+<?php
+/** @var MiraklSeller_Sales_Block_Adminhtml_Order_View $this */
+$_miraklOrder = $this->getMiraklOrder();
+$_customer = $_miraklOrder->getCustomer();
+$_billingAddress = $_customer->getBillingAddress();
+$_shippingAddress = $_customer->getShippingAddress();
+$_currencyCode = $_miraklOrder->getCurrencyIsoCode();
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td>
+                <h3><?php echo $this->escapeHtml($this->__('Mirakl Order # %s', $_miraklOrder->getId())) ?></h3>
+            </td>
+            <td class="form-buttons">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="box-left">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head"><?php echo $this->__('Order Information') ?></h4>
+        </div>
+        <fieldset>
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><?php echo $this->__('Connection') ?></td>
+                    <td class="value">
+                        <a href="<?php echo $this->getConnectionUrl() ?>"
+                           title="<?php echo $this->escapeHtml($this->__("Go to connection '%s'", $this->getConnection()->getName())) ?>">
+                            <?php echo $this->escapeHtml($this->getConnection()->getName()) ?>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Mirakl Order #') ?></td>
+                    <td class="value"><?php echo $this->escapeHtml($_miraklOrder->getId()) ?> <a href="<?php echo $this->getMiraklOrderUrl() ?>" title="<?php echo $this->escapeHtml($this->__('Show in Mirakl')) ?>" target="_blank"><?php echo $this->__('Show in Mirakl') ?></a></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Commercial Id') ?></td>
+                    <td class="value"><?php echo $this->escapeHtml($_miraklOrder->getCommercialId()) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Order Date') ?></td>
+                    <td class="value"><?php echo $this->formatDate($_miraklOrder->getCreatedDate()->format(\DateTime::ISO8601), 'short', true) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Status') ?></td>
+                    <td class="value"><?php echo $this->helper('mirakl_seller_sales')->getOrderStatusLabel($_miraklOrder) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Order Lines') ?></td>
+                    <td class="value"><?php echo $_miraklOrder->getOrderLines()->count() ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Total Price') ?></td>
+                    <td class="value"><?php echo $this->formatPrice($this->getGrandTotal(), $_currencyCode) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Order Total Commission') ?></td>
+                    <td class="value"><?php echo $this->formatPrice($_miraklOrder->getTotalCommission(), $_currencyCode) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Magento Order #') ?></td>
+                    <td class="value">
+                        <?php if ($_order = $this->getMagentoOrder()): ?>
+                            <a href="<?php echo $this->getUrl('*/sales_order/view', ['order_id' => $_order->getId()]) ?>"
+                               title="<?php echo $this->escapeHtml($this->__("Go to order '%s'", $_order->getIncrementId())) ?>">
+                                <?php echo $_order->getIncrementId() ?>
+                            </a>
+                        <?php else: ?>
+                            <em><?php echo $this->__('Not imported in Magento') ?></em>
+                        <?php endif ?>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+</div>
+
+<div class="box-right">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head"><?php echo $this->__('Customer Information') ?></h4>
+        </div>
+        <fieldset>
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><?php echo $this->__('Firstname') ?></td>
+                    <td class="value"><?php echo $this->escapeHtml($_customer->getFirstname()) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Lastname') ?></td>
+                    <td class="value"><?php echo $this->escapeHtml($_customer->getLastname()) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Locale') ?></td>
+                    <td class="value"><?php echo $this->escapeHtml($_customer->getLocale()) ?></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <?php $_additionalFields = $_miraklOrder->getOrderAdditionalFields() ?>
+    <?php if ($_additionalFields && $_additionalFields->count()): ?>
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head"><?php echo $this->__('Additional Information') ?></h4>
+            </div>
+            <fieldset>
+                <table cellspacing="0" class="form-list">
+                    <?php /** @var \Mirakl\MMP\Common\Domain\AdditionalFieldValue $_field */ ?>
+                    <?php foreach ($_additionalFields as $_field): ?>
+                        <tr>
+                            <td class="label"><?php echo $_field->getCode() ?></td>
+                            <td class="value"><?php echo $this->escapeHtml(is_array($_field->getValue()) ? implode(', ', $_field->getValue()) : $_field->getValue()) ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                </table>
+            </fieldset>
+        </div>
+    <?php endif ?>
+</div>
+
+<div class="clear"></div>
+
+<?php if ($_billingAddress): ?>
+    <div class="box-left">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head"><?php echo $this->__('Billing Address') ?></h4>
+            </div>
+            <fieldset>
+                    <address>
+                        <?php echo $_billingAddress->getFirstname() ?> <?php echo $_billingAddress->getLastname() ?><br>
+                        <?php echo $_billingAddress->getStreet1() ?><br>
+                        <?php if ($_street2 = $_billingAddress->getStreet2()): ?>
+                            <?php echo $_street2 ?><br>
+                        <?php endif ?>
+                        <?php echo $_billingAddress->getZipCode() ?> <?php echo $_billingAddress->getCity() ?><br>
+                        <?php if ($_countryCode = $_billingAddress->getCountry()): ?>
+                            <?php echo $this->getCountry($_countryCode) ?><br>
+                        <?php endif ?>
+                        <?php if ($_phone = $_billingAddress->getPhone()): ?>
+                            <?php echo $this->__('T: %s', $_phone) ?><br>
+                        <?php endif ?>
+                        <?php if ($_phone = $_billingAddress->getPhoneSecondary()): ?>
+                            <?php echo $this->__('T: %s', $_phone) ?><br>
+                        <?php endif ?>
+                    </address>
+            </fieldset>
+        </div>
+    </div>
+<?php endif ?>
+
+<?php if ($_shippingAddress): ?>
+    <div class="box-right">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head"><?php echo $this->__('Shipping Address') ?></h4>
+            </div>
+            <fieldset>
+                <address>
+                    <?php echo $_shippingAddress->getFirstname() ?> <?php echo $_shippingAddress->getLastname() ?><br>
+                    <?php echo $_shippingAddress->getStreet1() ?><br>
+                    <?php if ($_street2 = $_shippingAddress->getStreet2()): ?>
+                        <?php echo $_street2 ?><br>
+                    <?php endif ?>
+                    <?php echo $_shippingAddress->getZipCode() ?> <?php echo $_shippingAddress->getCity() ?><br>
+                    <?php if ($_countryCode = $_shippingAddress->getCountry()): ?>
+                        <?php echo $this->getCountry($_countryCode) ?><br>
+                    <?php endif ?>
+                    <?php if ($_phone = $_shippingAddress->getPhone()): ?>
+                        <?php echo $this->__('T: %s', $_phone) ?><br>
+                    <?php endif ?>
+                    <?php if ($_phone = $_shippingAddress->getPhoneSecondary()): ?>
+                        <?php echo $this->__('T: %s', $_phone) ?><br>
+                    <?php endif ?>
+                </address>
+                <?php if ($_shippingAddress->getAdditionalInfo()): ?>
+                    <div><strong><?php echo $this->escapeHtml($_shippingAddress->getAdditionalInfo()) ?></strong></div>
+                <?php endif ?>
+            </fieldset>
+        </div>
+    </div>
+<?php endif ?>
+
+<div class="clear"></div>
+
+<div class="box-left">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head"><?php echo $this->__('Payment Information') ?></h4>
+        </div>
+        <fieldset>
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><?php echo $this->__('Payment Workflow') ?></td>
+                    <td class="value"><?php echo $this->helper('mirakl_seller_sales')->getPaymentWorkflowLabel($_miraklOrder) ?></td>
+                </tr>
+                <?php if ($_paymentDuration = $this->getPaymentDuration()): ?>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Payment Delay') ?></td>
+                        <td class="value"><?php echo $this->escapeHtml($this->__('%s days', $_paymentDuration)) ?></td>
+                    </tr>
+                <?php endif ?>
+                <tr>
+                    <td class="label"><?php echo $this->__('Payment Type') ?></td>
+                    <td class="value"><?php echo $this->escapeHtml($_miraklOrder->getPaymentType()) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Currency') ?></td>
+                    <td class="value"><?php echo $this->escapeHtml($_currencyCode) ?></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+</div>
+
+<div class="box-right">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head"><?php echo $this->__('Shipping Information') ?></h4>
+        </div>
+        <fieldset>
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><?php echo $this->__('Shipping Price Excl. Tax') ?></td>
+                    <td class="value"><?php echo $this->formatPrice($_miraklOrder->getShipping()->getPrice(), $_currencyCode) ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Shipping Tax') ?></td>
+                    <td class="value"><?php echo $this->formatPrice($this->getShippingTaxAmount(), $_currencyCode) ?></td>
+                </tr>
+                <?php if ($_type = $_miraklOrder->getShipping()->getType()): ?>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Shipping Type') ?></td>
+                        <td class="value"><?php echo $this->escapeHtml($_type->getLabel()) ?> (<?php echo $_type->getCode() ?>)</td>
+                    </tr>
+                <?php endif ?>
+                <?php if ($_zone = $_miraklOrder->getShipping()->getZone()): ?>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Shipping Zone') ?></td>
+                        <td class="value"><?php echo $this->escapeHtml($_zone->getLabel()) ?> (<?php echo $_zone->getCode() ?>)</td>
+                    </tr>
+                <?php endif ?>
+            </table>
+        </fieldset>
+    </div>
+</div>

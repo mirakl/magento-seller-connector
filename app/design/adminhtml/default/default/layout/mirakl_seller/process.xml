@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="core/template" name="mirakl_seller_process_async" template="mirakl_seller/process/async.phtml"/>
+        </reference>
+    </default>
+
+    <adminhtml_mirakl_seller_process_list>
+        <reference name="content">
+            <block type="mirakl_seller_process/adminhtml_process_list" name="mirakl_seller_process_list" />
+        </reference>
+    </adminhtml_mirakl_seller_process_list>
+
+    <adminhtml_mirakl_seller_process_view>
+        <reference name="content">
+            <block type="mirakl_seller_process/adminhtml_process_view" name="mirakl_seller_process_view" template="mirakl_seller/process/view.phtml" />
+        </reference>
+    </adminhtml_mirakl_seller_process_view>
+</layout>

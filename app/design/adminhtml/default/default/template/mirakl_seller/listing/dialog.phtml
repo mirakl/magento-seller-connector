@@ -1,0 +1,41 @@
+<div class="mirakl-export-dialog" style="display: none;" id="mirakl-export-dialog">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="head-edit-form fieldset-legend"><?php echo $this->__('Export Products') ?></h4>
+        </div>
+        <div class="content">
+            <div class="export-messages" style="display: none;"><ul class="messages"></ul></div>
+            <div><label for="export_mode"><?php echo $this->__('Which products do you want to export?')?></label></div>
+            <form action="" method="post" id="export-form" onsubmit="return miraklExport.submitExport();">
+                 <table class="form-list question" cellspacing="0">
+                     <tbody><tr>
+                         <td>
+                             <select id="export_mode" name="export_mode" class="required-entry select">
+                                 <option value=""></option>
+                                 <option value="<?php echo strtolower(MiraklSeller_Core_Model_Listing::PRODUCT_MODE_PENDING) ?>"><?php echo $this->__('Products waiting for export') ?></option>
+                                 <option value="<?php echo strtolower(MiraklSeller_Core_Model_Listing::PRODUCT_MODE_ERROR) ?>"><?php echo $this->__('Products in error') ?></option>
+                                 <option value="<?php echo strtolower(MiraklSeller_Core_Model_Listing::PRODUCT_MODE_ALL) ?>"><?php echo $this->__('All products') ?></option>
+                             </select>
+                         </td>
+                     </tr>
+                 </tbody></table>
+             </form>
+        </div>
+        <div class="buttons-set">
+            <div class="f-right">
+                <button type="button" class="scalable" onclick="miraklExport.submitExport()"><span><?php echo $this->__('OK')?></span></button>
+                <button type="button" class="scalable" onclick="miraklExport.hidePopup()"><span><?php echo $this->__('Cancel')?></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popup-window-mask" style="display: none;"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+    document.observe('dom:loaded', function () {
+        miraklExport = new AdminMiraklExport();
+        miraklExport.exportUrl = '<?php echo $this->getExportProductUrl()?>';
+    });
+//]]>
+</script>

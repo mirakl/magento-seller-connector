@@ -1,0 +1,73 @@
+<?php
+/** @var MiraklSeller_Sales_Block_Adminhtml_Sales_Order_View_Mirakl $this */
+$_miraklOrder = $this->getMiraklOrder();
+?>
+<div class="entry-edit mirakl">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Mirakl Marketplace Order Information') ?></h4>
+        <div class="tools"><?php echo $this->getAccountEditLink()?></div>
+    </div>
+    <div class="fieldset">
+        <div class="hor-scroll">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><label><?php echo $this->__('Connection') ?></label></td>
+                    <td class="value"><strong><?php echo $this->getConnection()->getName() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo $this->__('Commercial Id') ?></label></td>
+                    <td class="value">
+                        <strong>
+                            <?php echo $this->getMiraklOrder()->getId() ?><br>
+                            <a href="<?php echo $this->getViewMiraklOrderUrl() ?>" target="_blank"><?php echo $this->__('View in Mirakl') ?></a> /
+                            <a href="<?php echo $this->getViewMiraklOrderInMagentoUrl() ?>"><?php echo $this->__('View in Magento') ?></a>
+                        </strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo $this->__('Status') ?></label></td>
+                    <td class="value"><strong><?php echo $this->getMiraklOrderStatus() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo $this->__('Customer') ?></label></td>
+                    <td class="value"><strong><?php echo $this->getMiraklOrderCustomerName() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo $this->__('Incident') ?></label></td>
+                    <td class="value">
+                        <strong>
+                            <?php if ($_miraklOrder->getHasIncident()): ?>
+                                <span class="incident"><?php echo $this->__('An incident has been opened on this Mirakl order.') ?></span><br>
+                                <a href="<?php echo $this->getViewMiraklOrderUrl() ?>" target="_blank"><?php echo $this->__('See details in Mirakl') ?></a>
+                            <?php else: ?>
+                                <?php echo $this->__('No incident opened for this Mirakl order.') ?>
+                            <?php endif ?>
+                        </strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo $this->__('Refund') ?></label></td>
+                    <td class="value">
+                        <strong>
+                            <?php if ($this->isMiraklOrderRefunded($_miraklOrder)): ?>
+                                <span class="incident"><?php echo $this->__('A refund has been issued on this Mirakl order.') ?></span><br>
+                                <a href="<?php echo $this->getViewMiraklOrderUrl() ?>" target="_blank"><?php echo $this->__('See details in Mirakl') ?></a>
+                            <?php else: ?>
+                                <?php echo $this->__('No refund requested for this Mirakl order.') ?>
+                            <?php endif ?>
+                        </strong>
+                    </td>
+                </tr>
+                <?php /** @var \Mirakl\MMP\Common\Domain\AdditionalFieldValue $_field */ ?>
+                <?php foreach ($_miraklOrder->getOrderAdditionalFields() as $_field): ?>
+                    <tr>
+                        <td class="label"><label><?php echo $_field->getCode() ?></label></td>
+                        <td class="value">
+                            <strong><?php echo $this->escapeHtml(is_array($_field->getValue()) ? implode(', ', $_field->getValue()) : $_field->getValue()) ?></strong>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </table>
+        </div>
+    </div>
+</div>

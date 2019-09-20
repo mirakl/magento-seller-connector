@@ -1,0 +1,342 @@
+#nav a.marketplace span {
+    background: url('../images/mirakl_seller/logo_white_256px.png') no-repeat left 3px;
+    background-size: 20px;
+    padding-left: 2em;
+}
+
+button.marketplace span {
+    background-image: url(../images/mirakl_seller/logo_white_256px.png);
+    background-size: 14px;
+    padding-left: 20px;
+}
+
+ul.config-tabs dt span.marketplace {
+    background: url('../images/mirakl_seller/logo_blue_256px.png') no-repeat left center;
+    background-size: 20px;
+    padding: 2px 0 2px 24px;
+}
+
+.adminhtml-mirakl-seller-connection-edit #edit_form .field-tooltip img {
+    border: 1px solid #d6d6d6;
+    width: 500px;
+}
+
+.adminhtml-mirakl-seller-connection-edit #edit_form .field-tooltip > div:before,
+.adminhtml-mirakl-seller-connection-edit #edit_form .field-tooltip > div:after {
+    background: none;
+}
+
+.adminhtml-mirakl-seller-connection-edit #edit_form .field-tooltip:hover > div,
+.adminhtml-mirakl-seller-connection-edit #edit_form .field-tooltip > div {
+    top: 0;
+    left: 20px;
+}
+
+.adminhtml-mirakl-seller-listing-edit .entry-edit-head {
+    overflow: hidden;
+}
+
+.adminhtml-mirakl-seller-listing-edit #offer_additional_fields_fieldset th {
+    font-size: 16px;
+    padding: 5px;
+}
+
+.adminhtml-mirakl-seller-listing-edit #products th a[name=name] {
+    min-width: 100px;
+}
+
+.adminhtml-mirakl-seller-process-view .entry-edit table th {
+    width: 200px;
+}
+
+.adminhtml-mirakl-seller-listing-edit #products_table span.status {
+    min-width: 80px;
+}
+
+.grid td.pre,
+.report-output table td {
+    font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    line-height: 16px;
+}
+
+.report-status {
+    float: left;
+}
+
+.report-output {
+    clear: both;
+}
+
+.report-output-content {
+    max-height: 450px;
+    border: 1px solid #d6d6d6;
+    border-radius: 3px;
+    padding: 8px 10px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+}
+
+.report-output table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.report-output table td {
+    padding: 0 4px;
+}
+
+.report-output table td.num {
+    color: rgba(0, 0 , 0, .3);
+    width: 1%;
+    vertical-align: top;
+    border-right: 1px solid #d6d6d6;
+    white-space: nowrap;
+    text-align: right;
+    padding: 0 4px;
+}
+
+.report-output table td.line {
+    color: #333;
+    word-wrap: normal;
+}
+
+.report-output table td.pre {
+    white-space: pre;
+}
+
+span.status {
+    display: block;
+    font: bold 10px/16px Arial, Helvetica, sans-serif;
+    margin: 1px 0;
+    color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 12px;
+    padding: 2px;
+}
+
+span.status-new {
+    background-color: #5bc0de;
+}
+
+span.status-pending,
+span.status-waiting-integration,
+span.status-invalid-report-format,
+span.status-not-found-in-report {
+    background-color: #ff9c00;
+}
+
+span.status-error,
+span.status-transformation-error,
+span.status-integration-error {
+    background-color: #e41101;
+}
+
+span.status-success {
+    background-color: #3cb861;
+}
+
+span.status-delete,
+span.status-integration-complete {
+    background-color: #777;
+}
+
+.mirakl-order-view .notice-msg {
+    border: 1px solid #1563a3 !important;
+    color: #1563a3 !important;
+    background: #ecf7ff url('../images/mirakl_seller/logo_blue_256px.png') no-repeat 10px 10px !important;
+    background-size: 16px !important;
+}
+
+.mirakl-order-view .notice-msg a {
+    color: #1563a3 !important;
+}
+
+.mirakl-order-view .error-msg a {
+    color: #df280a !important;
+}
+
+td span.magento,
+td span.marketplace {
+    text-transform: none;
+    font-weight: normal;
+    text-shadow: 0 1px 0 #bc3918;
+    background: linear-gradient(to bottom, #ee5a27 0, #ca3a0f 100%) repeat-x;
+    border-color: #1b5381;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 4px;
+    line-height: 13px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+td span.marketplace.product,
+td span.marketplace {
+    text-shadow: 0 1px 0 #1b5381;
+    background: linear-gradient(to bottom, #4495d8 0, #2867c1 100%) repeat-x;
+}
+
+td span.marketplace.offer,
+td span.magento.marketplace {
+    text-shadow: 0 1px 0 #446b1f;
+    background: linear-gradient(to bottom, #83c841 0, #5aa630 100%) repeat-x;
+}
+
+.adminhtml-mirakl-seller-order-view .form-list td.value {
+    font-weight: bold;
+}
+
+.adminhtml-mirakl-seller-order-view .red {
+    color: red;
+}
+
+.mirakl-order-messages:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.mirakl-order-messages .message {
+    width: 70%;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.mirakl-order-messages .message-left {
+    float: left;
+}
+
+.mirakl-order-messages .message-right {
+    float: right;
+}
+
+.mirakl-order-messages .message.shop {
+    background-color: #ecf7ff;
+}
+
+.mirakl-order-messages .message.magento {
+    background-color: #fff;
+}
+
+.mirakl-order-messages .meta {
+    color: #999;
+    font-style: italic;
+}
+
+.mirakl-order-messages .meta .magento {
+    color: #df280a;
+}
+
+.mirakl-order-messages .meta .mirakl {
+    color: #1563a3;
+}
+
+.mirakl-order-messages .subject {
+    font-weight: bold;
+}
+
+.entry-edit.mirakl .entry-edit-head {
+    background: #1563a3;
+}
+
+.entry-edit.mirakl a {
+    color: #1563a3;
+}
+
+.entry-edit.mirakl .fieldset {
+    border-color: #1563a3;
+    background: #ecf7ff;
+}
+
+.entry-edit.mirakl .incident {
+    color: red;
+}
+
+span.dashboard-success > a {
+    color: #3cb861
+}
+
+span.dashboard-error > a {
+    color: #e41101;
+}
+
+.tooltip-seller {
+    display: inline;
+    position: relative;
+}
+
+.tooltip-seller:hover:after {
+    background: #333;
+    background: rgba(0, 0, 0, .8);
+    border-radius: 5px;
+    bottom: 30px;
+    color: #fff;
+    content: attr(data-tip);
+    left: 1%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
+
+.tooltip-seller:hover:before {
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 26px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}
+
+.tip {
+    display: inline-block;
+}
+
+.mirakl-export-dialog {
+    background-color: #6f8992;
+    background: rgba(111, 137, 146, 0.5);
+    cursor: default;
+    left: 50%;
+    margin: 0 0 0 -150px;
+    position: fixed;
+    top: 50%;
+    width: 300px;
+    padding: 8px;
+    z-index: 400;
+    -moz-box-shadow: 0 0 100px #ccc;
+    -webkit-box-shadow: 0 0 100px #ccc;
+    box-shadow: 0 0 100px #ccc;
+}
+
+.mirakl-export-dialog .entry-edit {
+    border: 1px solid #6f8992;
+}
+
+.mirakl-export-dialog .content {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.mirakl-export-dialog .question {
+    margin-top: 15px;
+}
+
+.mirakl-export-dialog .buttons-set {
+    border-top: 1px solid #ddd;
+    background: #eee;
+    margin: 0;
+    overflow: hidden;
+    padding: 7px 10px 8px;
+    width: 278px;
+}
+
+.mirakl-export-dialog .buttons-set button {
+    margin: 0 0 0 5px;
+}

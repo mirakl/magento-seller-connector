@@ -1,0 +1,5 @@
+<jstranslator>
+    <validate-api-url translate="message" module="mirakl_seller_api">
+        <message>Please enter a valid Mirakl URL. Protocol https:// is required (https://your_mirakl_env/api).</message>
+    </validate-api-url>
+</jstranslator>

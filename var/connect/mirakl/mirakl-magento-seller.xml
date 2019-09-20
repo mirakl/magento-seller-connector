@@ -1,0 +1,202 @@
+<_>
+   <form_key>hAD2xvDxG8YYcYRm</form_key>
+   <name>mirakl_magento_seller</name>
+   <channel>community</channel>
+   <version_ids>
+      <version_ids>2</version_ids>
+   </version_ids>
+   <summary>Magento Seller Connector is a plug-in that enables you to synchronize calalog data between Magento and Mirakl: for example products, Price &amp; Stock.</summary>
+   <description>Magento Seller Connector includes the following capabilities:
+
+- select the connector interface language: French or English
+- connect to multiple Mirakl Marketplaces
+    - select your store
+    - define multiple product listings per Marketplace
+- export products to be integrated in the operator catalog
+    - download a file to map your catalog to the operator&amp;apos;s catalog
+    - configure the product type when exporting Price &amp;amp; Stock
+    - configure operator product report file format (CSV delimiter, error column, identifier column)
+    - export products
+    - track product exports
+    - download Mirakl and operator reports
+- update product Price &amp;amp; Stock in the operator catalog
+    - configure and export discount prices
+        - using Magento special price
+        - using Magento promotion catalog price rules
+    - configure and export volume prices and discount volume prices
+    - include all Price &amp;amp; Stock information (API OF01 fields) to your Magento export
+    - configure and export additional fields
+    - export Price &amp;amp; Stock
+    - track Price &amp;amp; Stock export
+    - download Mirakl reports
+- schedule processes using cron jobs
+
+Magento Seller Connector does not include the following features yet:
+
+- channel export (API OF01)
+- order management</description>
+   <license>Custom license</license>
+   <license_uri>http://magento.mirakl.net/_files/LICENSE.txt</license_uri>
+   <version>1.2.2</version>
+   <stability>stable</stability>
+   <notes>N/A</notes>
+   <authors>
+      <name>
+         <name>Mirakl PHP Team</name>
+      </name>
+      <user>
+         <user>PHP-Team</user>
+      </user>
+      <email>
+         <email>support@mirakl.com</email>
+      </email>
+   </authors>
+   <depends_php_min>5.6.0</depends_php_min>
+   <depends_php_max>7.1.30</depends_php_max>
+   <depends>
+      <package>
+         <name>
+            <name/>
+         </name>
+         <channel>
+            <channel/>
+         </channel>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+         <files>
+            <files>                            </files>
+         </files>
+      </package>
+      <extension>
+         <name>
+            <name>Core</name>
+         </name>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+      </extension>
+   </depends>
+   <contents>
+      <target>
+         <target>magelocal</target>
+         <target>magecommunity</target>
+         <target>magedesign</target>
+         <target>magedesign</target>
+         <target>mageetc</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>mageskin</target>
+         <target>mageskin</target>
+         <target>mageskin</target>
+         <target>mage</target>
+         <target>mage</target>
+         <target>mageskin</target>
+         <target>mageskin</target>
+         <target>mageetc</target>
+         <target>magelocale</target>
+         <target>magelib</target>
+      </target>
+      <path>
+         <path/>
+         <path>MiraklSeller</path>
+         <path>adminhtml/default/default/layout/mirakl_seller/</path>
+         <path>adminhtml/default/default/template/mirakl_seller/</path>
+         <path>modules/MiraklSeller_All.xml</path>
+         <path>en_US/MiraklSeller_Api.csv</path>
+         <path>en_US/MiraklSeller_Core.csv</path>
+         <path>fr_FR/MiraklSeller_Api.csv</path>
+         <path>fr_FR/MiraklSeller_Core.csv</path>
+         <path>fr_FR/MiraklSeller_Process.csv</path>
+         <path>adminhtml/default/default/css/mirakl_seller.css</path>
+         <path>adminhtml/default/default/images/mirakl_seller/</path>
+         <path>adminhtml/default/default/js/mirakl_seller.js</path>
+         <path>shell/mirakl_seller/</path>
+         <path>includes/mirakl/</path>
+         <path>adminhtml/default/default/js/mirakl_dialogs.js</path>
+         <path>adminhtml/default/default/js/mirakl_validation.js</path>
+         <path>modules/MiraklSeller_Sales.xml</path>
+         <path>fr_FR/MiraklSeller_Sales.csv</path>
+         <path>Psr/</path>
+      </path>
+      <type>
+         <type>file</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>dir</type>
+      </type>
+      <include>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+      </include>
+      <ignore>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+      </ignore>
+   </contents>
+   <page>1</page>
+   <limit>200</limit>
+   <folder/>
+   <package/>
+</_>

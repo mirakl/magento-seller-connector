@@ -1,0 +1,55 @@
+[
+    {
+        "sku": "wbk003c",
+        "price": "100",
+        "special_price": "90",
+        "special_from_date": "2018-03-01 00:00:00",
+        "special_to_date": "2028-03-01 00:00:00",
+        "tier_price": {
+            "5": "84",
+            "10": "82",
+            "20": "80"
+        },
+        "configurable_attributes": {
+            "color": {
+                "Indigo": { "pricing_value": "10", "is_percent": "1" }
+            },
+            "size": {
+                "XS": { "pricing_value": "11", "is_percent": "0" },
+                "S":  { "pricing_value": "22", "is_percent": "0" },
+                "M":  { "pricing_value": "33", "is_percent": "0" },
+                "L":  { "pricing_value": "44", "is_percent": "0" },
+                "XL": { "pricing_value": "55", "is_percent": "0" }
+            }
+        }
+    },
+    {
+        "sku": "wbk003xs",
+        "visibility": "4",
+        "special_price": "55",
+        "special_from_date": "2018-02-01 00:00:00",
+        "special_to_date": "2028-02-01 00:00:00",
+        "tier_price": {
+            "5": "52"
+        }
+    },
+    {
+        "sku": "wbk003",
+        "special_price": "54",
+        "special_from_date": "2018-01-01 00:00:00",
+        "special_to_date": "2028-01-01 00:00:00",
+        "tier_price": {
+            "5": "48",
+            "15": "46"
+        }
+    },
+    {
+        "sku": "mpd003c",
+        "description": "Different description than simple product and short description empty",
+        "short_description": ""
+    },
+    {
+        "sku": "mpd004",
+        "gift_wrapping_price": 199.90
+    }
+]

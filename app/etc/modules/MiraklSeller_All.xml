@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MiraklSeller_Api>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Core/>
+            </depends>
+        </MiraklSeller_Api>
+        <MiraklSeller_Core>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <MiraklSeller_Api/>
+                <MiraklSeller_Process/>
+            </depends>
+        </MiraklSeller_Core>
+        <MiraklSeller_Process>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Core/>
+            </depends>
+        </MiraklSeller_Process>
+    </modules>
+</config>

@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var MiraklSeller_Core_Block_Adminhtml_System_Config_Fieldset_Hint $this
+ */
+?>
+<div class="box">
+    <ul>
+        <li><?php echo $this->__('Magento Seller Connector Version: <strong>v%s</strong>', $this->getCurrentVersion()) ?></li>
+        <?php if ($_versionSDK = $this->getCurrentVersionSDK()): ?>
+            <li><?php echo $this->__('PHP SDK Version: <strong>v%s</strong>', $_versionSDK) ?></li>
+        <?php endif ?>
+    </ul>
+</div>

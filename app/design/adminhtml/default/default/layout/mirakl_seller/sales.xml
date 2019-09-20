@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_mirakl_seller_order_list>
+        <reference name="content">
+            <block type="mirakl_seller_sales/adminhtml_order_list" name="mirakl_seller_order_list"/>
+        </reference>
+    </adminhtml_mirakl_seller_order_list>
+    <adminhtml_sales_order_view>
+        <reference name="order_history">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/view/history.phtml</template></action>
+        </reference>
+        <reference name="order_info">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/view/info.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_addcomment>
+        <reference name="order_history">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/view/history.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_addcomment>
+    <adminhtml_sales_order_invoice_addcomment>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/comments/view.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_invoice_addcomment>
+    <adminhtml_sales_order_invoice_view>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/comments/view.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    <adminhtml_sales_order_shipment_addcomment>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/comments/view.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_shipment_addcomment>
+    <adminhtml_sales_order_shipment_view>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/comments/view.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+    <adminhtml_mirakl_seller_order_view>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/mirakl_seller.css</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/mirakl_order_view.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="mirakl_seller_sales/adminhtml_order_view" name="mirakl_seller_order_view" template="mirakl_seller/order/view.phtml" />
+            <block type="mirakl_seller_sales/adminhtml_order_items" name="mirakl_seller_order_items" />
+        </reference>
+    </adminhtml_mirakl_seller_order_view>
+    <adminhtml_sales_order_view>
+        <reference name="order_history">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/view/history.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_addcomment>
+        <reference name="order_history">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/view/history.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_addcomment>
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="tax">
+            <action method="setTemplate">
+                <template>mirakl_seller/sales/creditmemo/totals/tax.phtml</template>
+            </action>
+        </reference>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/comments/view.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    <adminhtml_sales_order_creditmemo_addcomment>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>mirakl_seller/sales/order/comments/view.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_creditmemo_addcomment>
+</layout>

@@ -1,0 +1,44 @@
+<?php
+/** @var MiraklSeller_Core_Block_Adminhtml_Listing_Dashboard $this */
+$_nbProductsSuccess = $this->getNbSuccessProducts();
+$_productsLabelFailed = $this->getFailedProductsLabels();
+$_listing = $this->getListing();
+?>
+<div class="entry-edit">
+    <div class="fieldset" style="overflow: hidden;">
+        <ol>
+            <li>
+                <span class="dashboard-success"><a title="<?php echo sprintf($this->__('Filter products by %s status'), 'SUCCESS' )?>" href="#" onclick="addProductsGridFilter('SUCCESS');"><?php echo $this->__('Products exported successfully'); ?></a></span><strong> (<?php echo $_nbProductsSuccess; ?>)</strong>
+                <?php if (!empty($_productsLabelFailed)): ?>
+                    <?php
+                    $label = ' - ';
+                    foreach ($_productsLabelFailed as $status => $productsLabel) {
+                        $label .= '<a title= "'.sprintf($this->__('Filter products by %s status'),$status ).'" href="#" onclick="addProductsGridFilter(\'' . $status . '\');">' . $this->__($productsLabel['product_import_status']) . '</a><strong> (' . $productsLabel['count'] . ')</strong> - ';
+                    }
+                    $label = rtrim($label, '- ');
+                    ?>
+                    <span class="dashboard-error"><?php echo $label; ?></span>
+                <?php endif; ?>
+
+            </li>
+        </ol>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function addProductsGridFilter(status) {
+        if (status === 'ERROR') {
+            var filterId = 'products_listing_product_filter_<?php echo $_listing->getId() ?>_offer_import_status';
+        } else {
+            var filterId = 'products_listing_product_filter_<?php echo $_listing->getId() ?>_product_import_status';
+        }
+
+        var element = $(filterId);
+        element.value = status;
+
+        var elements = [element];
+        productsJsObject.reload(productsJsObject.addVarToUrl(productsJsObject.filterVar, encode_base64(Form.serializeElements(elements))));
+    }
+    //]]>
+</script>

@@ -1,0 +1,13 @@
+app/code/community/MiraklSeller/                                app/code/community/MiraklSeller/
+app/design/adminhtml/default/default/layout/mirakl_seller/*     app/design/adminhtml/default/default/layout/mirakl_seller/
+app/design/adminhtml/default/default/template/mirakl_seller/*   app/design/adminhtml/default/default/template/mirakl_seller/
+app/etc/modules/MiraklSeller_All.xml                            app/etc/modules/MiraklSeller_All.xml
+app/etc/modules/MiraklSeller_Sales.xml                          app/etc/modules/MiraklSeller_Sales.xml
+app/locale/en_US/*                                              app/locale/en_US/
+app/locale/fr_FR/*                                              app/locale/fr_FR/
+skin/adminhtml/default/default/css/mirakl_seller.css            skin/adminhtml/default/default/css/mirakl_seller.css
+skin/adminhtml/default/default/images/mirakl_seller/*           skin/adminhtml/default/default/images/mirakl_seller/
+skin/adminhtml/default/default/js/mirakl_seller.js              skin/adminhtml/default/default/js/mirakl_seller.js
+skin/adminhtml/default/default/js/mirakl_dialogs.js             skin/adminhtml/default/default/js/mirakl_dialogs.js
+skin/adminhtml/default/default/js/mirakl_validation.js          skin/adminhtml/default/default/js/mirakl_validation.js
+shell/mirakl_seller/*                                           shell/mirakl_seller/

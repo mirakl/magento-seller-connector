@@ -1,0 +1,121 @@
+<?php
+/** @var MiraklSeller_Process_Block_Adminhtml_Process_View $this */
+$_process = $this->getProcess();
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td>
+                <h3><?php echo $this->escapeHtml($this->__('Process #%s', $_process->getId())) ?></h3>
+            </td>
+            <td class="form-buttons">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Process Information') ?></h4>
+    </div>
+    <fieldset>
+        <table cellspacing="2">
+            <tr>
+                <th><?php echo $this->__('Type') ?></th>
+                <td><?php echo $this->escapeHtml($_process->getType()) ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $this->__('Name') ?></th>
+                <td><?php echo $this->escapeHtml($_process->getName()) ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $this->__('Date') ?></th>
+                <td><?php echo $this->helper('core')->formatDate($_process->getCreatedAt(), 'medium', true) ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $this->__('Duration') ?></th>
+                <td><?php echo $this->helper('mirakl_seller_process')->formatDuration($_process->getDuration()) ?></td>
+            </tr>
+            <?php if ($_url = $_process->getFileUrl()): ?>
+                <tr>
+                    <th><?php echo $this->__('File') ?></th>
+                    <td>
+                        <a href="<?php echo $_url ?>" title="<?php echo $this->escapeHtml($this->__('Download')) ?>"><?php echo $this->escapeHtml($this->__('Download')) ?></a><?php if ($_fileSize = $_process->getFileSizeFormatted('&nbsp;')): ?>&nbsp;(<?php echo $_fileSize ?>)<?php endif ?>
+                        <?php if ($_process->canShowFile()): ?>
+                            <?php echo $this->__('or') ?> <a target="_blank" href="<?php echo $this->getUrl('*/*/showFile', ['id' => $_process->getId()]) ?>" title="<?php echo $this->escapeHtml($this->__('Open in Browser')) ?>"><?php echo $this->escapeHtml($this->__('open in browser')) ?></a>
+                        <?php endif ?>
+                    </td>
+                </tr>
+            <?php endif ?>
+            <tr>
+                <th><?php echo $this->__('Status') ?></th>
+                <td><p class="report-status"><span class="<?php echo $_process->getStatusClass() ?>"><span><?php echo $this->__($_process->getStatus()) ?></span></span></p></td>
+            </tr>
+            <?php if ($_process->getHelper()): ?>
+                <tr>
+                    <th><?php echo $this->__('Helper') ?></th>
+                    <td><?php echo $_process->getHelper() ?></td>
+                </tr>
+                <tr>
+                    <th><?php echo $this->__('Method') ?></th>
+                    <td><?php echo $_process->getMethod() ?></td>
+                </tr>
+            <?php endif ?>
+        </table>
+    </fieldset>
+</div>
+
+<div class="report-output">
+    <?php if (!$_process->getOutput()): ?>
+        <?php echo $this->__('This process has not generated any output.') ?>
+    <?php else: ?>
+        <p class="report-output-actions">
+            <a href="#" onclick="$$('.report-output td.line').invoke('toggleClassName', 'pre'); return false;"><?php echo $this->__('Toggle Text Wrapping') ?></a>
+            | <a href="#" onclick="$('report-output-block').scrollTop = $('report-output-block').scrollHeight; return false;"><?php echo $this->__('Scroll to Bottom') ?></a>
+            | <a href="#" onclick="$('report-output-block').scrollTop = 0; return false;"><?php echo $this->__('Scroll to Top') ?></a>
+        </p>
+        <div id="report-output-block" class="report-output-content">
+            <table>
+                <?php foreach (explode("\n", $_process->getOutput()) as $_i => $_line): ?>
+                    <tr>
+                        <td class="num"><?php echo $_i + 1 ?></td>
+                        <td class="line pre"><?php echo $_line ?></td>
+                    </tr>
+                <?php endforeach ?>
+            </table>
+        </div>
+    <?php endif ?>
+</div>
+
+<?php if ($_process->getMiraklStatus()): ?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head"><?php echo $this->__('Mirakl Information') ?></h4>
+        </div>
+        <fieldset>
+            <table cellspacing="2">
+                <tbody>
+                <tr>
+                    <th><?php echo $this->__('Mirakl API Status') ?></th>
+                    <td><p class="report-status"><span class="<?php echo $_process->getStatusClass(true) ?>"><span><?php echo $this->__($_process->getMiraklStatus()) ?></span></span></p></td>
+                </tr>
+                <tr>
+                    <th><?php echo $this->__('Synchro Id') ?></th>
+                    <td><?php echo $this->__($_process->getSynchroId()) ?></td>
+                </tr>
+                <?php if ($_url = $_process->getFileUrl(true)): ?>
+                    <tr>
+                        <th><?php echo $this->__('Mirakl Error File') ?></th>
+                        <td>
+                            <a href="<?php echo $_url ?>" title="<?php echo $this->escapeHtml($this->__('Download')) ?>"><?php echo $this->escapeHtml($this->__('Download')) ?></a><?php if ($_fileSize = $_process->getFileSizeFormatted('&nbsp;', true)): ?>&nbsp;(<?php echo $_fileSize ?>)<?php endif ?>
+                            <?php if ($_process->canShowFile(true)): ?>
+                                <?php echo $this->__('or') ?> <a target="_blank" href="<?php echo $this->getUrl('*/*/showFile', ['id' => $_process->getId(), 'mirakl' => true]) ?>" title="<?php echo $this->escapeHtml($this->__('Open in Browser')) ?>"><?php echo $this->escapeHtml($this->__('open in browser')) ?></a>
+                            <?php endif ?>
+                        </td>
+                    </tr>
+                <?php endif ?>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+<?php endif ?>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <mirakl_seller translate="label">
+            <label><![CDATA[<span class="marketplace">Mirakl Seller</span>]]></label>
+            <sort_order>111</sort_order>
+        </mirakl_seller>
+    </tabs>
+    <sections>
+        <mirakl_seller_api_developer translate="label" module="mirakl_seller_api">
+            <label>Developer</label>
+            <tab>mirakl_seller</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <log translate="label">
+                    <label>API Log Settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <log_option translate="label comment">
+                            <label>Log API Calls</label>
+                            <comment><![CDATA[If enabled, all API calls between Magento and Mirakl will be logged in <code>var/log/mirakl_seller_api.log</code> file.<br>Be aware that it is not recommended to enable this feature in a production environment.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller_api/system_config_source_api_logging</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </log_option>
+                        <log_filter translate="label comment">
+                            <label>Filter by API URL</label>
+                            <comment><![CDATA[This parameter allows you to filter the requests that have to be logged with a regular expression. This parameter allows you to filter the requests that have to be logged with a regular expression. For example: <code>api/orders/.+/accept</code> will log only OR21 requests. Use the pipe | to allow multiple request patterns. For example: <code>api/orders/.+/accept|api/orders/.+/ship</code> to log requests from API OR21 and OR24.<br>Leave empty to log all requests.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </log_filter>
+                        <log_buttons translate="label comment">
+                            <label>Logs</label>
+                            <sort_order>20</sort_order>
+                            <frontend_model>mirakl_seller_api/adminhtml_system_config_button_log</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </log_buttons>
+                    </fields>
+                </log>
+            </groups>
+        </mirakl_seller_api_developer>
+    </sections>
+</config>

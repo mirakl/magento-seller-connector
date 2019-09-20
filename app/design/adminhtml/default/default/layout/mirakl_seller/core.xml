@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_mirakl_seller_listing_list>
+        <reference name="content">
+            <block type="mirakl_seller/adminhtml_listing_list" name="mirakl_listing_list" />
+        </reference>
+    </adminhtml_mirakl_seller_listing_list>
+
+    <adminhtml_mirakl_seller_listing_edit>
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+        <reference name="content">
+            <block type="mirakl_seller/adminhtml_listing_edit" name="mirakl_listing_edit"/>
+            <block type="mirakl_seller/adminhtml_listing_dialog" name="mirakl_listing_dialog" template="mirakl_seller/listing/dialog.phtml"/>
+        </reference>
+        <reference name="left">
+            <block type="mirakl_seller/adminhtml_listing_edit_tabs" name="mirakl_listing_edit_tabs">
+                <block type="mirakl_seller/adminhtml_listing_edit_tab_main" name="mirakl_listing_edit_tab_main" />
+                <block type="mirakl_seller/adminhtml_listing_edit_tab_products_wrapper" name="mirakl_listing_edit_tab_products_wrapper">
+                    <block type="mirakl_seller/adminhtml_listing_dashboard" name="mirakl_listing_dashboard" template="mirakl_seller/listing/dashboard.phtml" />
+                    <block type="mirakl_seller/adminhtml_listing_edit_tab_products" name="mirakl_listing_edit_tab_products" />
+                </block>
+                <block type="mirakl_seller/adminhtml_listing_edit_tab_tracking_products" name="mirakl_listing_edit_tab_tracking_products" />
+                <block type="mirakl_seller/adminhtml_listing_edit_tab_tracking_offers" name="mirakl_listing_edit_tab_tracking_offers" />
+                <action method="addTab"><name>main</name><block>mirakl_listing_edit_tab_main</block></action>
+                <action method="addTab"><name>products</name><block>mirakl_listing_edit_tab_products_wrapper</block></action>
+                <action method="addTab"><name>tracking_products</name><block>mirakl_listing_edit_tab_tracking_products</block></action>
+                <action method="addTab"><name>tracking_offers</name><block>mirakl_listing_edit_tab_tracking_offers</block></action>
+            </block>
+        </reference>
+    </adminhtml_mirakl_seller_listing_edit>
+
+    <adminhtml_mirakl_seller_listing_productgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mirakl_seller/adminhtml_listing_edit_tab_products" name="mirakl_listing_edit_tab_products" />
+        </block>
+    </adminhtml_mirakl_seller_listing_productgrid>
+
+    <adminhtml_mirakl_seller_listing_trackingproductgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mirakl_seller/adminhtml_listing_edit_tab_tracking_products" name="mirakl_listing_edit_tab_tracking_products" />
+        </block>
+    </adminhtml_mirakl_seller_listing_trackingproductgrid>
+
+    <adminhtml_mirakl_seller_listing_trackingoffergrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mirakl_seller/adminhtml_listing_edit_tab_tracking_offers" name="mirakl_listing_edit_tab_tracking_offers" />
+        </block>
+    </adminhtml_mirakl_seller_listing_trackingoffergrid>
+</layout>

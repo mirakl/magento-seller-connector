@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mirakl_seller_process translate="label" module="mirakl_seller_process">
+            <label>Processes</label>
+            <tab>mirakl_seller</tab>
+            <sort_order>50</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <hint>
+                    <frontend_model>mirakl_seller/adminhtml_system_config_fieldset_hint</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </hint>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <auto_async_execution translate="label comment">
+                            <label>Automatic Asynchronous Execution</label>
+                            <comment><![CDATA[If enabled, pending processes will be automatically executed asynchronously during Magento backend navigation through an AJAX request.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_async_execution>
+                        <timeout_delay translate="label comment">
+                            <label>Timeout Delay</label>
+                            <comment><![CDATA[Delay in minutes after which the process has to be automatically cancelled.<br>This parameter is useful if a crash occurs during a process runtime and blocks other processes execution.<br>Leave blank to ignore.]]></comment>
+                            <validate>validate-greater-than-zero validate-number</validate>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </timeout_delay>
+                        <show_file_max_size translate="label comment">
+                            <label><![CDATA["Open in Browser" Max File Size]]></label>
+                            <comment><![CDATA[Allow files not exceeding this size (in MB) to be opened directly in browser.]]></comment>
+                            <validate>required-entry validate-greater-than-zero validate-number</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </show_file_max_size>
+                    </fields>
+                </general>
+            </groups>
+        </mirakl_seller_process>
+    </sections>
+</config>

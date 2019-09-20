@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/mirakl_seller.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/mirakl_seller.css</name></action>
+            <action method="addJs"><script>mage/adminhtml/rules.js</script></action>
+            <action method="addItem"><type>skin_js</type><name>js/mirakl_validation.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/mirakl_dialogs.js</name></action>
+        </reference>
+        <reference name="notifications">
+            <block type="mirakl_seller_api/adminhtml_notifications" name="mirakl_seller_api_notifications" template="mirakl_seller/api/notifications.phtml" />
+        </reference>
+    </default>
+
+    <adminhtml_mirakl_seller_connection_list>
+        <reference name="content">
+            <block type="mirakl_seller_api/adminhtml_connection_list" name="mirakl_connection_list" />
+        </reference>
+    </adminhtml_mirakl_seller_connection_list>
+
+    <adminhtml_mirakl_seller_connection_edit>
+        <reference name="content">
+            <block type="mirakl_seller_api/adminhtml_connection_edit" name="mirakl_connection_edit"/>
+        </reference>
+        <reference name="left">
+            <block type="mirakl_seller_api/adminhtml_connection_edit_tabs" name="mirakl_connection_edit_tabs">
+                <block type="mirakl_seller_api/adminhtml_connection_edit_tab_main" name="mirakl_connection_edit_tab_main"/>
+                <block type="mirakl_seller_api/adminhtml_connection_edit_tab_operator" name="mirakl_connection_edit_tab_operator"/>
+                <block type="mirakl_seller_api/adminhtml_connection_edit_tab_export" name="mirakl_connection_edit_tab_export"/>
+                <block type="mirakl_seller_api/adminhtml_connection_edit_tab_order" name="mirakl_connection_edit_tab_order"/>
+                <action method="addTab"><name>main</name><block>mirakl_connection_edit_tab_main</block></action>
+                <action method="addTab"><name>operator</name><block>mirakl_connection_edit_tab_operator</block></action>
+                <action method="addTab"><name>export</name><block>mirakl_connection_edit_tab_export</block></action>
+                <action method="addTab"><name>order</name><block>mirakl_connection_edit_tab_order</block></action>
+            </block>
+        </reference>
+    </adminhtml_mirakl_seller_connection_edit>
+</layout>

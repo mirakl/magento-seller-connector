@@ -1,0 +1,9 @@
+<?php
+/** @var MiraklSeller_Api_Block_Adminhtml_Notifications $this */
+?>
+<?php if ($this->isApiLogEnabled()): ?>
+    <div class="notification-global notification-global-warning">
+        <?php echo $this->__('<strong>Mirakl Seller API logging is enabled. It is not recommended to enable it in a production environment.</strong><br>'.
+            'Go to <a href="%s">developer configuration</a> to disable it.', $this->getDeveloperConfigUrl()) ?>
+    </div>
+<?php endif; ?>

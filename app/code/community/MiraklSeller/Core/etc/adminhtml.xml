@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <mirakl_seller>
+            <children>
+                <listings translate="title" module="mirakl_seller">
+                    <title>Listings</title>
+                    <action>adminhtml/mirakl_seller_listing/list</action>
+                    <sort_order>15</sort_order>
+                </listings>
+                <config>
+                    <children>
+                        <mirakl_seller translate="title" module="mirakl_seller">
+                            <title>General</title>
+                            <action>adminhtml/system_config/edit/section/mirakl_seller</action>
+                            <sort_order>10</sort_order>
+                        </mirakl_seller>
+                    </children>
+                </config>
+            </children>
+        </mirakl_seller>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <mirakl_seller>
+                        <title>Mirakl</title>
+                        <sort_order>10</sort_order>
+                        <children>
+                            <listings translate="title" module="mirakl_seller">
+                                <title>Listings</title>
+                                <sort_order>15</sort_order>
+                            </listings>
+                        </children>
+                    </mirakl_seller>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mirakl_seller>
+                                        <title>Mirakl Seller Core</title>
+                                    </mirakl_seller>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

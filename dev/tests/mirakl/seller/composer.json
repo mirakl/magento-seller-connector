@@ -1,0 +1,28 @@
+{
+    "require": {
+        "php": "^7.0",
+        "phpunit/phpunit": "~6.0",
+        "goaop/framework": "2.1.*",
+        "codeception/aspect-mock": "2.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mirakl\\": ["src/"],
+            "Mirakl\\Test\\Integration\\": ["tests/integration/"],
+            "Mirakl\\Test\\Unit\\": ["tests/unit/"]
+        },
+        "psr-0": {
+            "": [
+                "../../../../app",
+                "../../../../app/code/local",
+                "../../../../app/code/community",
+                "../../../../app/code/core",
+                "../../../../lib",
+                "../../../../includes/mirakl/mirakl/sdk-php/src",
+                "../../../../includes/mirakl/mirakl/sdk-php-shop/src",
+                "../../../../vendor/mirakl/sdk-php/src",
+                "../../../../vendor/mirakl/sdk-php-shop/src"
+            ]
+        }
+    }
+}

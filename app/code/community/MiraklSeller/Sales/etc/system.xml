@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mirakl_seller_sales translate="label" module="mirakl_seller_sales">
+            <label>Mirakl Orders</label>
+            <tab>mirakl_seller</tab>
+            <sort_order>20</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <hint>
+                    <frontend_model>mirakl_seller/adminhtml_system_config_fieldset_hint</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </hint>
+                <order_acceptance translate="label">
+                    <label>Mirakl Orders Acceptance Settings</label>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <auto_accept translate="label comment">
+                            <label>Automatic Acceptance</label>
+                            <comment><![CDATA[If enabled, Mirakl orders waiting for acceptance will be automatically accepted with scheduled task (every 15 minutes by default).]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_accept>
+                        <insufficient_stock translate="label comment">
+                            <label>Insufficient Stock</label>
+                            <comment><![CDATA[If the option "Reject item automatically" is selected, items of an order with not enough stock will be automatically rejected. Other items of the same order will be automatically accepted.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller_sales/order_acceptance_insufficientStock</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <auto_accept>1</auto_accept>
+                            </depends>
+                        </insufficient_stock>
+                        <backorder translate="label comment">
+                            <label>Backorder</label>
+                            <comment><![CDATA[Behavior applied when negative stock (backorder) is allowed on an item.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller_sales/order_acceptance_backorder</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <auto_accept>1</auto_accept>
+                            </depends>
+                        </backorder>
+                        <prices_variations translate="label comment">
+                            <label>Prices Variations</label>
+                            <comment><![CDATA[Falling prices differences allowed (in %) between product price of a Mirakl order and price in Magento. Otherwise, the order will be handled manually.<br>Leave the field empty to accept the order regardless the price difference.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <validate>validate-number</validate>
+                            <depends>
+                                <auto_accept>1</auto_accept>
+                            </depends>
+                        </prices_variations>
+                    </fields>
+                </order_acceptance>
+                <order translate="label">
+                    <label>Mirakl Orders Import Settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <auto_create_invoice translate="label comment">
+                            <label>Automatic Invoice Creation</label>
+                            <comment><![CDATA[If enabled, invoice will be created automatically while importing Mirakl order into Magento.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_create_invoice>
+                        <auto_create_shipment translate="label comment">
+                            <label>Automatic Shipment Creation</label>
+                            <comment><![CDATA[If enabled, shipment will be created automatically while importing Mirakl order into Magento (only if the Mirakl order has already been shipped).]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_create_shipment>
+                        <auto_create_refunds translate="label comment">
+                            <label>Automatic Refunds Creation</label>
+                            <comment><![CDATA[If enabled, refunds will be created automatically while importing Mirakl order into Magento.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_create_refunds>
+                        <auto_orders_import translate="label comment">
+                            <label>Automatic Orders Import</label>
+                            <comment><![CDATA[If enabled, all the Mirakl orders of all connections will be synchronized automatically via Magento cron tasks. Note that only modified orders since the last synchronization date will be processed.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_orders_import>
+                    </fields>
+                </order>
+            </groups>
+        </mirakl_seller_sales>
+    </sections>
+</config>

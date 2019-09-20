@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MiraklSeller_Sales>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <MiraklSeller_Core/>
+            </depends>
+        </MiraklSeller_Sales>
+    </modules>
+</config>

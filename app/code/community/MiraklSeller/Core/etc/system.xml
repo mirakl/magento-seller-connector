@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mirakl_seller translate="label" module="mirakl_seller">
+            <label>General</label>
+            <tab>mirakl_seller</tab>
+            <sort_order>11</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <hint>
+                    <frontend_model>mirakl_seller/adminhtml_system_config_fieldset_hint</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </hint>
+                <listing translate="label">
+                    <label>Listing</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <auto_create_tracking translate="label comment">
+                            <label>Automatic Tracking Creation</label>
+                            <comment><![CDATA[If enabled, a listing tracking is created each time you export products to Mirakl. You can then track the export status directly from Magento.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_create_tracking>
+                        <nb_image_exported translate="label comment">
+                            <label>Number of Exported Images</label>
+                            <comment><![CDATA[Number of images exported per product. Images are selected based on the sort order.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </nb_image_exported>
+                        <nb_days_expired translate="label comment">
+                            <label>Number of Days Before Products Expire</label>
+                            <comment><![CDATA[After X days following the export, status of products in "Waiting for integration" will be updated to "Waiting for export" and the export tracking will be changed to "Integration expired".]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </nb_days_expired>
+                        <nb_days_keep_failed_products translate="label comment">
+                            <label>Number of Days For Failed Products To Be Exported Again</label>
+                            <comment><![CDATA[After X days following a product in a failure status ("Transformation failed", "Integration failed", "Invalid report format", "Not found in report") will be updated to "Waiting for export".]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </nb_days_keep_failed_products>
+                    </fields>
+                </listing>
+                <offer_fields_mapping translate="label">
+                    <label>Offer Fields Mapping</label>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<em>Optionally, you can send more information for each offer exported to Mirakl.<br/>To do so, you can associate each Mirakl prices & stocks field with a Magento attribute.<br/>The Magento attribute value will be used during offer export.</em>]]></comment>
+                    <fields>
+                        <description translate="label comment">
+                            <label>Description</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdown</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </description>
+                        <internal_description translate="label comment">
+                            <label>Internal Description</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdown</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </internal_description>
+                        <price_additional_info translate="label comment">
+                            <label>Price Additional Information</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdown</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </price_additional_info>
+                        <min_quantity_alert translate="label comment">
+                            <label>Min Quantity Alert</label>
+                            <frontend_type>select</frontend_type>
+                            <comment><![CDATA[Magento attribute must be of type text field with input validation as integer number.]]></comment>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdownTextNumber</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_quantity_alert>
+                        <available_start_date translate="label comment">
+                            <label>Available Start Date</label>
+                            <frontend_type>select</frontend_type>
+                            <comment><![CDATA[Magento attribute must be of type date.]]></comment>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdownDate</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </available_start_date>
+                        <available_end_date translate="label comment">
+                            <label>Available End Date</label>
+                            <frontend_type>select</frontend_type>
+                            <comment><![CDATA[Magento attribute must be of type date.]]></comment>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdownDate</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </available_end_date>
+                        <leadtime_to_ship translate="label comment">
+                            <label>Leadtime to Ship</label>
+                            <frontend_type>select</frontend_type>
+                            <comment><![CDATA[Magento attribute must be of type text field with input validation as integer number.]]></comment>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdownTextNumber</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </leadtime_to_ship>
+                        <product_tax_code translate="label comment">
+                            <label>Product Tax Code</label>
+                            <frontend_type>select</frontend_type>
+                            <comment><![CDATA[Magento attribute must be of type text field or dropdown.]]></comment>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdownTextOrSelect</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_tax_code>
+                        <logistic_class translate="label comment">
+                            <label>Logistic Class</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller/system_config_source_attribute_dropdown</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </logistic_class>
+                    </fields>
+                </offer_fields_mapping>
+                <prices translate="label">
+                    <label><![CDATA[Prices & Quantities]]></label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_promotion_catalog_price_rule translate="label comment">
+                            <label>Enable Promotion Catalog Price Rules</label>
+                            <comment><![CDATA[If enabled, exported discount price will be filled with the best price between applicable Magento promotion catalog price rules and Magento special price. If a promotion price is applied, no discount periods are exported. If disabled, only Magento applicable special prices are used.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_promotion_catalog_price_rule>
+                        <customer_group translate="label comment">
+                            <label>Customer Group</label>
+                            <comment><![CDATA[Select the customer group to use for price and quantity export.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mirakl_seller/system_config_source_customer_dropdownCustomerGroup</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </customer_group>
+                    </fields>
+                </prices>
+            </groups>
+        </mirakl_seller>
+    </sections>
+</config>
