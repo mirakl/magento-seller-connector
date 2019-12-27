@@ -2,7 +2,7 @@
     "name": "mirakl/magento-seller-connector",
     "description": "Official Magento 1 Connector for the Mirakl Marketplace Platform.",
     "type": "magento-module",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "license": "proprietary",
     "require": {
         "mirakl/sdk-php-shop": "~1.9",

@@ -31,15 +31,15 @@ class MiraklSeller_Core_Block_Adminhtml_Listing_Edit_Tab_Products extends Mage_A
      * @var array
      */
     protected $_productStatusTooltips = array(
-        Offer::PRODUCT_NEW                    => 'Will be sent automatically in the next export.',
-        Offer::PRODUCT_PENDING                => 'Exported. Export status is about to be checked.',
-        Offer::PRODUCT_TRANSFORMATION_ERROR   => 'Your data does not satisfy Mirakl validation. Check the error message. When your product is ready to be exported, click on the Export Products button.',
-        Offer::PRODUCT_WAITING_INTEGRATION    => 'Marketplace integration in progress. Integration reports will be available soon in Magento.',
-        Offer::PRODUCT_INTEGRATION_COMPLETE   => 'Waiting for successful Price & Stock export for final product availability in the marketplace.',
-        Offer::PRODUCT_INTEGRATION_ERROR      => 'Your data does not satisfy the marketplace validation. Check the error message. When your product is ready to be exported, click on the Export Products button.',
-        Offer::PRODUCT_INVALID_REPORT_FORMAT  => 'The marketplace integration report file cannot be processed.',
-        Offer::PRODUCT_NOT_FOUND_IN_REPORT    => 'Product not found in the marketplace integration reports.',
-        Offer::PRODUCT_SUCCESS                => 'Product has been correctly imported in the marketplace.',
+        Offer::PRODUCT_NEW                   => 'Will be sent automatically in the next export.',
+        Offer::PRODUCT_PENDING               => 'Exported. Export status is about to be checked.',
+        Offer::PRODUCT_TRANSFORMATION_ERROR  => 'Your data does not satisfy Mirakl validation. Check the error message. When your product is ready to be exported, click on the Export Products button.',
+        Offer::PRODUCT_WAITING_INTEGRATION   => 'Marketplace integration in progress. Integration reports will be available soon in Magento.',
+        Offer::PRODUCT_INTEGRATION_COMPLETE  => 'Waiting for successful Price & Stock export for final product availability in the marketplace.',
+        Offer::PRODUCT_INTEGRATION_ERROR     => 'Your data does not satisfy the marketplace validation. Check the error message. When your product is ready to be exported, click on the Export Products button.',
+        Offer::PRODUCT_INVALID_REPORT_FORMAT => 'The marketplace integration report file cannot be processed.',
+        Offer::PRODUCT_NOT_FOUND_IN_REPORT   => 'Product not found in the marketplace integration reports.',
+        Offer::PRODUCT_SUCCESS               => 'Product has been correctly imported in the marketplace.',
     );
 
     /**
@@ -50,7 +50,7 @@ class MiraklSeller_Core_Block_Adminhtml_Listing_Edit_Tab_Products extends Mage_A
         Offer::OFFER_PENDING => 'Exported. Export status is about to be checked.',
         Offer::OFFER_SUCCESS => 'Price & Stock has been correctly imported in the marketplace.',
         Offer::OFFER_ERROR   => 'Your data does not satisfy Mirakl validation. Check the error message. When your price & stock is ready to be exported click on the Export Prices & Stocks button.',
-        Offer::OFFER_DELETE  => 'Product will be deleted from the marketplace in the next export.',
+        Offer::OFFER_DELETE  => 'Offer quantity will be set to zero in the marketplace during the next export.',
     );
 
     /**
@@ -145,7 +145,7 @@ class MiraklSeller_Core_Block_Adminhtml_Listing_Edit_Tab_Products extends Mage_A
             : $this->__($this->_offerStatusTooltips[$row->getData($key)]);
 
         return sprintf(
-            '<div class="tip"><span data-tip="%s" class="tooltip-seller status status-%s">%s&nbsp</span></div>',
+            '<div class="tip"><span data-tip="%s" class="tooltip-seller status status-%s">%s</span></div>',
             $this->escapeHtml($tooltip),
             $className,
             $statusLabel
@@ -456,17 +456,6 @@ class MiraklSeller_Core_Block_Adminhtml_Listing_Edit_Tab_Products extends Mage_A
             'new', array(
                 'label'   => $this->__('Mark as Export'),
                 'url'     => $massNewUrl,
-                'confirm' => Mage::helper('adminhtml')->__('Are you sure?'),
-            )
-        );
-
-        $massDeleteUrl = $this->getUrl(
-            '*/mirakl_seller_listing/massDeleteOffer', array('id' => $this->getListing()->getId())
-        );
-        $this->getMassactionBlock()->addItem(
-            'delete', array(
-                'label'   => $this->__('Mark as Delete'),
-                'url'     => $massDeleteUrl,
                 'confirm' => Mage::helper('adminhtml')->__('Are you sure?'),
             )
         );

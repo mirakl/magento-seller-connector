@@ -37,7 +37,7 @@ Magento Seller Connector does not include the following features yet:
 - order management</description>
    <license>Custom license</license>
    <license_uri>http://magento.mirakl.net/_files/LICENSE.txt</license_uri>
-   <version>1.2.2</version>
+   <version>1.2.3</version>
    <stability>stable</stability>
    <notes>N/A</notes>
    <authors>

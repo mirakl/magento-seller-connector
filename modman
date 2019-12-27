@@ -11,3 +11,4 @@ skin/adminhtml/default/default/js/mirakl_seller.js              skin/adminhtml/d
 skin/adminhtml/default/default/js/mirakl_dialogs.js             skin/adminhtml/default/default/js/mirakl_dialogs.js
 skin/adminhtml/default/default/js/mirakl_validation.js          skin/adminhtml/default/default/js/mirakl_validation.js
 shell/mirakl_seller/*                                           shell/mirakl_seller/
+lib/Psr/*                                                       lib/Psr/

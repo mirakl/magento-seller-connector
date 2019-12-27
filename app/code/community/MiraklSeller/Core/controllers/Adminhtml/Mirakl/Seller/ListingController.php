@@ -213,27 +213,6 @@ class MiraklSeller_Core_Adminhtml_Mirakl_Seller_ListingController extends Mage_A
     }
 
     /**
-     * Remove multiple offers from listing at once
-     */
-    public function massDeleteOfferAction()
-    {
-        $listing = $this->_getListing(true);
-        $productIds = $this->getRequest()->getParam('products');
-
-        try {
-            Mage::getResourceModel('mirakl_seller/offer')
-                ->markOffersAsDelete($listing->getId(), $productIds);
-
-            $this->_getSession()->addSuccess($this->__('Selected prices & stocks will be deleted during the next export.'));
-        } catch (Exception $e) {
-            Mage::logException($e);
-            $this->_getSession()->addError($e->getMessage());
-        }
-
-        return $this->_redirectReferer();
-    }
-
-    /**
      * Mark multiple offers from listing as new at once
      */
     public function massNewOfferAction()

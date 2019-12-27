@@ -118,6 +118,8 @@ class MiraklSeller_Core_Model_Observer_Product
             /** @var MiraklSeller_Core_Model_Listing $listing */
             foreach ($listings as $listing) {
                 $listing->setProductIds($productIds);
+
+                // Do not delete offers in Mirakl but define them to qty 0
                 $this->_offerResource->markOffersAsDelete($listing->getId(), $productIds);
 
                 /** @var Process $process */

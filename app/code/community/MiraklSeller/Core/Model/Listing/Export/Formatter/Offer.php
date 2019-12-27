@@ -96,7 +96,7 @@ class MiraklSeller_Core_Model_Listing_Export_Formatter_Offer
             'product-id-type'       => $data['product-id-type'],
             'description'           => $data['description'],
             'internal-description'  => $data['internal_description'],
-            'price'                 => isset($data['price']) ? self::formatPrice($data['price'] + $additionalPrice) : '',
+            'price'                 => isset($data['price']) ? self::formatPrice($data['price'] + $additionalPrice) : '0',
             'price-additional-info' => $data['price_additional_info'],
             'quantity'              => isset($data['qty']) ? (int) $data['qty'] : '',
             'min-quantity-alert'    => $data['min_quantity_alert'],

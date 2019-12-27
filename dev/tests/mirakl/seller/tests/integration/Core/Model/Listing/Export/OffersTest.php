@@ -223,4 +223,42 @@ class OffersTest extends TestCase
             ],
         ];
     }
+
+    /**
+     * @covers ::export
+     * @param   array   $productIds
+     * @param   array   $expectedResult
+     * @dataProvider getTestExportWithDeleteOffersDataProvider
+     */
+    public function testExportWithDeleteOffers($productIds, $expectedResult)
+    {
+        $listing = $this->_createSampleListing();
+
+        /** @var \MiraklSeller_Core_Model_Resource_Offer $offerResource */
+        $offerResource = \Mage::getResourceModel('mirakl_seller/offer');
+        $offerResource->createOffers($listing->getId(), $productIds);
+        $offerResource->updateProducts($listing->getId(), $productIds, [
+            'offer_import_status' => \MiraklSeller_Core_Model_Offer::OFFER_DELETE,
+        ]);
+
+        /** @var \MiraklSeller_Core_Model_Listing_Export_Offers $exportModel */
+        $exportModel = \Mage::getModel('mirakl_seller/listing_export_offers');
+
+        $result = $exportModel->export($listing);
+
+        $this->assertEquals($expectedResult, $result);
+    }
+
+    /**
+     * @return  array
+     */
+    public function getTestExportWithDeleteOffersDataProvider()
+    {
+        return [
+            [
+                [267, 268],
+                $this->_getJsonFileContents('expected_export_offers_delete_1.json')
+            ],
+        ];
+    }
 }

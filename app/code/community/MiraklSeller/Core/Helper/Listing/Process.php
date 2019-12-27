@@ -77,9 +77,13 @@ class MiraklSeller_Core_Helper_Listing_Process extends MiraklSeller_Core_Helper_
         $listing = Mage::getModel('mirakl_seller/listing')->load($listingId);
         $listing->validate();
 
-        // Retrieve product ids associated with the listing and with offer import status set to NEW, SUCCESS, ERROR or DELETE
-        $offerStatuses = array(Offer::OFFER_NEW, Offer::OFFER_SUCCESS, Offer::OFFER_ERROR, Offer::OFFER_DELETE);
+        // Retrieve product ids associated with the listing and with offer import status set to one of:
+        // NEW, SUCCESS, ERROR, DELETE
+        $offerStatuses = array(
+            Offer::OFFER_NEW, Offer::OFFER_SUCCESS, Offer::OFFER_ERROR, Offer::OFFER_DELETE
+        );
         $where = array('offer_import_status IN (?)' => $offerStatuses);
+
         if (!empty($productIds)) {
             // Retrieve only products specified
             $where['product_id IN (?)'] = $productIds;
@@ -136,7 +140,8 @@ class MiraklSeller_Core_Helper_Listing_Process extends MiraklSeller_Core_Helper_
 
         // Set offers status to PENDING for exported product ids and import tracking id
         $exportedProductIds = array_keys($data);
-        $this->_offerResource->deleteListingOffers($listing->getId(), Offer::OFFER_DELETE); // Remove offers with status DELETE
+        // Remove offers with status DELETE
+        $this->_offerResource->deleteListingOffers($listing->getId(), array(Offer::OFFER_DELETE));
         $this->_offerResource->markOffersAsPending($listing->getId(), $exportedProductIds, $result->getImportId());
 
         // Update listing last export date
