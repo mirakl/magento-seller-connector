@@ -1,5 +1,8 @@
 <?php
 
+require_once 'Psr/Log/LoggerInterface.php';
+require_once 'Psr/Log/LogLevel.php';
+
 use Psr\Log\LogLevel;
 
 class MiraklSeller_Api_Model_Log_Logger implements \Psr\Log\LoggerInterface

@@ -1,5 +1,5 @@
 <_>
-   <form_key>hAD2xvDxG8YYcYRm</form_key>
+   <form_key>6ollcswIW2dTHBGh</form_key>
    <name>mirakl_magento_seller</name>
    <channel>community</channel>
    <version_ids>
@@ -37,7 +37,7 @@ Magento Seller Connector does not include the following features yet:
 - order management</description>
    <license>Custom license</license>
    <license_uri>http://magento.mirakl.net/_files/LICENSE.txt</license_uri>
-   <version>1.2.3</version>
+   <version>1.2.4</version>
    <stability>stable</stability>
    <notes>N/A</notes>
    <authors>
@@ -195,8 +195,4 @@ Magento Seller Connector does not include the following features yet:
          <ignore/>
       </ignore>
    </contents>
-   <page>1</page>
-   <limit>200</limit>
-   <folder/>
-   <package/>
 </_>

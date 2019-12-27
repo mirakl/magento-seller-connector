@@ -57,7 +57,7 @@ class MiraklSeller_Sales_Block_Adminhtml_Sales_Order_Grid extends Mage_Adminhtml
     {
         $value = $column->getFilter()->getValue();
         $cond = $value === '0' ? array('null' => true) : array('eq' => $value);
-        $collection->addFieldToFilter('mirakl_connection_id', $cond);
+        $collection->addFieldToFilter('main_table.mirakl_connection_id', $cond);
     }
 
     /**
