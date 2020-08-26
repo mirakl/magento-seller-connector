@@ -13,8 +13,7 @@ class MiraklSeller_Api_Adminhtml_Mirakl_Seller_ConnectionController extends Mage
         if ($mustExists && !$connection->getId()) {
             $this->_getSession()->addError($this->__('This connection no longer exists.'));
             $this->_redirect('*/*/');
-            $this->getResponse()->sendResponse();
-            exit; // @codingStandardsIgnoreLine
+            $this->getResponse()->sendHeadersAndExit();
         }
 
         return $connection;
@@ -51,7 +50,8 @@ class MiraklSeller_Api_Adminhtml_Mirakl_Seller_ConnectionController extends Mage
      */
     public function editAction()
     {
-        $connection = $this->_getConnection();
+        $mustExists = $this->getRequest()->has('id');
+        $connection = $this->_getConnection($mustExists);
 
         $data = $this->_getSession()->getFormData(true);
         if (!empty($data)) {

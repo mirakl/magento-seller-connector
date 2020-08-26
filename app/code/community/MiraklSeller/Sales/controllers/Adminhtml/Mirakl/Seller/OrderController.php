@@ -70,8 +70,7 @@ class MiraklSeller_Sales_Adminhtml_Mirakl_Seller_OrderController extends Mage_Ad
     {
         $this->_getSession()->addError($message);
         $this->_redirect('*/*/list');
-        $this->getResponse()->sendResponse();
-        exit; // @codingStandardsIgnoreLine
+        $this->getResponse()->sendHeadersAndExit();
     }
 
     /**

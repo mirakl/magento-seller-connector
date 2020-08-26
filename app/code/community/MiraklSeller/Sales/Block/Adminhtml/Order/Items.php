@@ -191,7 +191,7 @@ class MiraklSeller_Sales_Block_Adminhtml_Order_Items extends Mage_Adminhtml_Bloc
                     $imageHelper = new Mage_Catalog_Helper_Image(); // Do not use Mage::helper() to reset image model cache
                     try {
                         $data['product_image'] = $imageHelper->init($product, 'thumbnail')->resize(75);
-                    } catch (Exception $e) { // @codingStandardsIgnoreLine
+                    } catch (Exception $e) {
                         // Ignore any exception on image
                     }
                 }

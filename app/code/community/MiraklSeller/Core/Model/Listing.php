@@ -55,11 +55,25 @@ class MiraklSeller_Core_Model_Listing extends Mage_Core_Model_Abstract
     protected $_productIds;
 
     /**
+     * @var string
+     */
+    protected $_decodeMethod = 'unserialize';
+
+    /**
      * Initialize model
      */
     protected function _construct()
     {
         $this->_init('mirakl_seller/listing');
+    }
+
+    /**
+     * @param   string  $str
+     * @return  mixed
+     */
+    protected function _decode($str)
+    {
+        return call_user_func($this->_decodeMethod, $str);
     }
 
     /**
@@ -137,7 +151,7 @@ class MiraklSeller_Core_Model_Listing extends Mage_Core_Model_Abstract
     {
         $params = $this->_getData('builder_params');
         if (is_string($params)) {
-            $params = unserialize($params); // @codingStandardsIgnoreLine
+            $params = $this->_decode($params);
         }
 
         return is_array($params) ? $params : array();
@@ -177,7 +191,7 @@ class MiraklSeller_Core_Model_Listing extends Mage_Core_Model_Abstract
     {
         $values = $this->_getData('variants_attributes');
         if (is_string($values)) {
-            $values = unserialize($values); // @codingStandardsIgnoreLine
+            $values = $this->_decode($values);
         }
 
         return is_array($values) ? $values : array();
@@ -190,7 +204,7 @@ class MiraklSeller_Core_Model_Listing extends Mage_Core_Model_Abstract
     {
         $values = $this->_getData('offer_additional_fields_values');
         if (is_string($values)) {
-            $values = unserialize($values); // @codingStandardsIgnoreLine
+            $values = $this->_decode($values);
         }
 
         return is_array($values) ? $values : array();

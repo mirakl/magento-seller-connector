@@ -26,6 +26,7 @@ class MiraklSeller_Core_Model_Autoload
                 'candidates' => array(
                     BP . DS . 'vendor',
                     BP . DS . 'includes' . DS . 'mirakl',
+                    BP . DS . 'lib' . DS . 'mirakl',
                 ),
             )
         );

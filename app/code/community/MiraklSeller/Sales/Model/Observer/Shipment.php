@@ -37,17 +37,43 @@ class MiraklSeller_Sales_Model_Observer_Shipment extends MiraklSeller_Sales_Mode
                 // Block partial shipping
                 $this->_fail($this->__('Partial shipping is not allowed on this Mirakl order.'), $action);
             }
+        } catch (\Exception $e) {
+            $this->_getSession()->addError($this->__('An error occurred: %s', $e->getMessage()));
+        }
+    }
 
-            // Handle Magento order fully shipped
-            $trackings = $request->getParam('tracking', array());
-            foreach ($trackings as $tracking) {
+    /**
+     * Intercept order shipping manual or automatic save
+     *
+     * @param   Varien_Event_Observer   $observer
+     */
+    public function onShipmentSaveAfter(Varien_Event_Observer $observer)
+    {
+        /** @var Mage_Sales_Model_Order_Shipment $shipment */
+        $shipment = $observer->getEvent()->getShipment();
+
+        $order = $shipment->getOrder();
+        if (!$this->_isImportedMiraklOrder($order)) {
+            return; // Not a Mirakl order, leave
+        }
+
+        if ($this->_getOrderQtyToShip($order) > 0) {
+            return; // Order is not totally shipped, abort
+        }
+
+        $connection  = $this->_getConnectionById($order->getMiraklConnectionId());
+        $miraklOrder = $this->_getMiraklOrder($connection, $order->getMiraklOrderId());
+
+        try {
+            /** @var Mage_Sales_Model_Order_Shipment_Track $track */
+            foreach ($shipment->getAllTracks() as $track) {
                 // Send order tracking info to Mirakl
                 $this->_apiOrder->updateOrderTrackingInfo(
                     $connection,
                     $miraklOrder->getId(),
                     '', // Carrier code may not be present in Mirakl and is not mandatory
-                    $tracking['title'],
-                    $tracking['number']
+                    $track->getTitle(),
+                    $track->getNumber()
                 );
                 break; // Stop after the first, Mirakl handles only one tracking
             }

@@ -228,7 +228,7 @@ class MiraklSeller_Sales_Helper_Order extends Mage_Core_Helper_Abstract
             try {
                 $this->importMiraklOrder($connection, $miraklOrder);
                 $importedMiraklOrderIds[] = $miraklOrder->getId();
-            } catch (AlreadyExistsException $e) { // @codingStandardsIgnoreLine
+            } catch (AlreadyExistsException $e) {
                 // Ignore already existing imported orders
             }
         }

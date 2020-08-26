@@ -10,11 +10,25 @@ class MiraklSeller_Process_Model_Resource_Process extends Mage_Core_Model_Resour
     );
 
     /**
+     * @var string
+     */
+    protected $_encodeMethod = 'md5';
+
+    /**
      * Initialize model and primary key field
      */
     protected function _construct()
     {
         $this->_init('mirakl_seller_process/process', 'id');
+    }
+
+    /**
+     * @param   string  $str
+     * @return  mixed
+     */
+    protected function _encode($str)
+    {
+        return call_user_func($this->_encodeMethod, $str);
     }
 
     /**
@@ -25,7 +39,7 @@ class MiraklSeller_Process_Model_Resource_Process extends Mage_Core_Model_Resour
     {
         /** @var MiraklSeller_Process_Model_Process $object */
         if (!$object->getHash()) {
-            $object->setHash(md5($object->getType() . ' ' . $object->getName())); // @codingStandardsIgnoreLine
+            $object->setHash($this->_encode($object->getType() . ' ' . $object->getName()));
         }
 
         if (!$object->getStatus()) {

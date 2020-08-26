@@ -62,8 +62,8 @@ abstract class MiraklSeller_Sales_Model_Observer_Abstract
         if ($action && ($refererUrl = $action->getRequest()->getServer('HTTP_REFERER'))) {
             Mage::getSingleton('adminhtml/session')->addError($msg);
             $action->setFlag('', Action::FLAG_NO_DISPATCH, true);
-            $action->getResponse()->setRedirect($refererUrl)->sendResponse();
-            exit; // @codingStandardsIgnoreLine
+            $action->getResponse()->setRedirect($refererUrl);
+            $action->getResponse()->sendHeadersAndExit();
         }
 
         Mage::throwException($msg);
@@ -108,7 +108,7 @@ abstract class MiraklSeller_Sales_Model_Observer_Abstract
             );
         }
 
-        Mage::register('mirakl_order', $miraklOrder);
+        Mage::register('mirakl_order', $miraklOrder, true);
 
         return $miraklOrder;
     }

@@ -7,7 +7,7 @@ class MiraklSeller_Process_Model_Output_Cli extends MiraklSeller_Process_Model_O
      */
     public function display($str)
     {
-        echo $str . PHP_EOL; // @codingStandardsIgnoreLine
+        printf('%s%s', $str, PHP_EOL);
         @ob_flush();
 
         return $this;

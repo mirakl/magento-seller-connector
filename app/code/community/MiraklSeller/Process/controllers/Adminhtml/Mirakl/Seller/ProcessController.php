@@ -20,7 +20,7 @@ class MiraklSeller_Process_Adminhtml_Mirakl_Seller_ProcessController extends Mag
      */
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('mirakl/processes');
+        return Mage::getSingleton('admin/session')->isAllowed('mirakl_seller/processes');
     }
 
     /**
@@ -78,7 +78,9 @@ class MiraklSeller_Process_Adminhtml_Mirakl_Seller_ProcessController extends Mag
             $process->run();
         }
 
-        exit; // @codingStandardsIgnoreLine
+        $this->getResponse()->clearBody();
+
+        $this->setFlag('', self::FLAG_NO_POST_DISPATCH, true);
     }
 
     /**
@@ -242,7 +244,9 @@ class MiraklSeller_Process_Adminhtml_Mirakl_Seller_ProcessController extends Mag
             ->setBody($body)
             ->sendResponse();
 
-        exit; // @codingStandardsIgnoreLine
+        $this->getResponse()->clearBody();
+
+        $this->setFlag('', self::FLAG_NO_POST_DISPATCH, true);
     }
 
     /**

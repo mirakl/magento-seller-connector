@@ -20,8 +20,7 @@ class MiraklSeller_Core_Adminhtml_Mirakl_Seller_ListingController extends Mage_A
         if ($mustExists && !$listing->getId()) {
             $this->_getSession()->addError($this->__('This listing no longer exists.'));
             $this->_redirect('*/*/');
-            $this->getResponse()->sendResponse();
-            exit; // @codingStandardsIgnoreLine
+            $this->getResponse()->sendHeadersAndExit();
         }
 
         return $listing;
@@ -116,7 +115,8 @@ class MiraklSeller_Core_Adminhtml_Mirakl_Seller_ListingController extends Mage_A
 
             session_write_close();
 
-            echo $contents; // @codingStandardsIgnoreLine
+            $this->getResponse()->setBody($contents);
+            $this->getResponse()->outputBody();
         } catch (Exception $e) {
             $this->_getSession()->addError($e->getMessage());
 
@@ -129,7 +129,8 @@ class MiraklSeller_Core_Adminhtml_Mirakl_Seller_ListingController extends Mage_A
      */
     public function editAction()
     {
-        $listing = $this->_getListing();
+        $mustExists = $this->getRequest()->has('id');
+        $listing = $this->_getListing($mustExists);
 
         $data = $this->_getSession()->getFormData(true);
         if (!empty($data)) {

@@ -26,7 +26,7 @@ class MiraklSeller_Shell_Process extends Mage_Shell_Abstract
     protected function _echo($str)
     {
         if (!$this->_quiet) {
-            echo $str . PHP_EOL; // @codingStandardsIgnoreLine
+            printf('%s%s', $str, PHP_EOL);
         }
     }
 
@@ -35,8 +35,7 @@ class MiraklSeller_Shell_Process extends Mage_Shell_Abstract
      */
     protected function _fault($str)
     {
-        $this->_echo($str);
-        exit; // @codingStandardsIgnoreLine
+        throw new \Exception($str);
     }
 
     /**
@@ -44,42 +43,46 @@ class MiraklSeller_Shell_Process extends Mage_Shell_Abstract
      */
     public function run()
     {
-        /** @var MiraklSeller_Process_Model_Process $process */
-        if ($id = $this->getArg('run')) {
-            $process = Mage::getModel('mirakl_seller_process/process')->load($id);
-            if (!$process->getId()) {
-                $this->_fault('This process no longer exists.');
-            }
-            if (!$process->isPending() && !$this->getArg('force')) {
-                $this->_fault('This process has already been executed. Use --force option to force execution.');
-            }
-            if (!$this->_quiet) {
-                $process->addOutput('cli');
-            }
-            $process->run(true);
-        } elseif ($this->getArg('pending')) {
-            $process = Mage::helper('mirakl_seller_process')->getPendingProcess();
-            if ($process) {
-                $this->_echo(sprintf('Processing #%d', $process->getId()));
+        try {
+            /** @var MiraklSeller_Process_Model_Process $process */
+            if ($id = $this->getArg('run')) {
+                $process = Mage::getModel('mirakl_seller_process/process')->load($id);
+                if (!$process->getId()) {
+                    $this->_fault('This process no longer exists.');
+                }
+                if (!$process->isPending() && !$this->getArg('force')) {
+                    $this->_fault('This process has already been executed. Use --force option to force execution.');
+                }
                 if (!$this->_quiet) {
                     $process->addOutput('cli');
                 }
-                $process->run();
+                $process->run(true);
+            } elseif ($this->getArg('pending')) {
+                $process = Mage::helper('mirakl_seller_process')->getPendingProcess();
+                if ($process) {
+                    $this->_echo(sprintf('Processing #%d', $process->getId()));
+                    if (!$this->_quiet) {
+                        $process->addOutput('cli');
+                    }
+                    $process->run();
+                } else {
+                    $this->_echo('Nothing to process');
+                }
+            } elseif ($this->getArg('stop-errors')) {
+                $this->_echo('Stopping running processes that have an error report');
+                $stopped = Mage::helper('mirakl_seller_process/error')->stopProcessesInError();
+                $this->_echo("Stopped $stopped process(es)");
+            } elseif ($this->getArg('timeout')) {
+                $this->_echo('Marking running processes as timeout if execution time has exceeded the configured delay in admin');
+                $delay = Mage::helper('mirakl_seller_process/config')->getTimeoutDelay();
+                $this->_echo("Delay: $delay min");
+                $updated = Mage::getResourceModel('mirakl_seller_process/process')->markAsTimeout($delay);
+                $this->_echo("Updated $updated process(es)");
             } else {
-                $this->_echo('Nothing to process');
+                $this->_echo($this->usageHelp());
             }
-        } elseif ($this->getArg('stop-errors')) {
-            $this->_echo('Stopping running processes that have an error report');
-            $stopped = Mage::helper('mirakl_seller_process/error')->stopProcessesInError();
-            $this->_echo("Stopped $stopped process(es)");
-        } elseif ($this->getArg('timeout')) {
-            $this->_echo('Marking running processes as timeout if execution time has exceeded the configured delay in admin');
-            $delay = Mage::helper('mirakl_seller_process/config')->getTimeoutDelay();
-            $this->_echo("Delay: $delay min");
-            $updated = Mage::getResourceModel('mirakl_seller_process/process')->markAsTimeout($delay);
-            $this->_echo("Updated $updated process(es)");
-        } else {
-            $this->_echo($this->usageHelp());
+        } catch (\Exception $e) {
+            $this->_echo('ERROR: ' . $e->getMessage());
         }
     }
 

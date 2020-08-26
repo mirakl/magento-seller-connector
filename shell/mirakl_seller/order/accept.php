@@ -47,7 +47,7 @@ class MiraklSeller_Shell_Order_Accept extends Mage_Shell_Abstract
     protected function _echo($str)
     {
         if (!$this->_quiet) {
-            echo $str . PHP_EOL; // @codingStandardsIgnoreLine
+            printf('%s%s', $str, PHP_EOL);
         }
     }
 
@@ -56,8 +56,7 @@ class MiraklSeller_Shell_Order_Accept extends Mage_Shell_Abstract
      */
     protected function _fault($str)
     {
-        $this->_echo($str);
-        exit; // @codingStandardsIgnoreLine
+        throw new \Exception($str);
     }
 
     /**
@@ -67,7 +66,7 @@ class MiraklSeller_Shell_Order_Accept extends Mage_Shell_Abstract
     protected function _acceptOrdersFromConnection($connectionId)
     {
         if (!Mage::helper('mirakl_seller_sales/config')->isAutoAcceptOrdersEnabled()) {
-            $this->_fault('ERROR: auto acceptance of Mirakl orders is disabled in Magento configuration.');
+            $this->_fault('Auto acceptance of Mirakl orders is disabled in Magento configuration.');
         }
 
         $process = $this->_createProcess($connectionId);
@@ -99,16 +98,16 @@ class MiraklSeller_Shell_Order_Accept extends Mage_Shell_Abstract
      */
     public function run()
     {
-        if ($this->getArg('all')) {
-            $this->_acceptOrdersFromAllConnections();
-        } elseif ($connectionId = $this->getArg('connection')) {
-            try {
+        try {
+            if ($this->getArg('all')) {
+                $this->_acceptOrdersFromAllConnections();
+            } elseif ($connectionId = $this->getArg('connection')) {
                 $this->_acceptOrdersFromConnection($connectionId);
-            } catch (Exception $e) {
-                $this->_fault('An error occurred: ' . $e->getMessage());
+            } else {
+                $this->_echo($this->usageHelp());
             }
-        } else {
-            echo $this->usageHelp(); // @codingStandardsIgnoreLine
+        } catch (\Exception $e) {
+            $this->_echo('ERROR: ' . $e->getMessage());
         }
     }
 

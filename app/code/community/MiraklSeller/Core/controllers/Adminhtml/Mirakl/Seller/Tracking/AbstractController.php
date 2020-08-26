@@ -33,8 +33,7 @@ abstract class MiraklSeller_Core_Adminhtml_Mirakl_Seller_Tracking_AbstractContro
         if ($mustExists && !$tracking->getId()) {
             $this->_getSession()->addError($this->__('This tracking no longer exists.'));
             $this->_redirect('*/*/');
-            $this->getResponse()->sendResponse();
-            exit; // @codingStandardsIgnoreLine
+            $this->getResponse()->sendHeadersAndExit();
         }
 
         return $tracking;
@@ -75,7 +74,8 @@ abstract class MiraklSeller_Core_Adminhtml_Mirakl_Seller_Tracking_AbstractContro
 
             session_write_close();
 
-            echo $contents; // @codingStandardsIgnoreLine
+            $this->getResponse()->setBody($contents);
+            $this->getResponse()->outputBody();
         } catch (Exception $e) {
             $this->_getSession()->addError($e->getMessage());
 

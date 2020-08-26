@@ -65,6 +65,7 @@ class MiraklSeller_Sales_Model_Observer_Comment extends MiraklSeller_Sales_Model
         );
         $response = json_encode($response);
         $action->getResponse()->setBody($response)->sendResponse();
-        exit; // @codingStandardsIgnoreLine
+        $action->getResponse()->clearBody();
+        $action->setFlag('', 'no-dispatch', true);
     }
 }

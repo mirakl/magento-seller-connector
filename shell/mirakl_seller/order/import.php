@@ -47,7 +47,7 @@ class MiraklSeller_Shell_Order_Import extends Mage_Shell_Abstract
     protected function _echo($str)
     {
         if (!$this->_quiet) {
-            echo $str . PHP_EOL; // @codingStandardsIgnoreLine
+            printf('%s%s', $str, PHP_EOL);
         }
     }
 
@@ -56,8 +56,7 @@ class MiraklSeller_Shell_Order_Import extends Mage_Shell_Abstract
      */
     protected function _fault($str)
     {
-        $this->_echo($str);
-        exit; // @codingStandardsIgnoreLine
+        throw new \Exception($str);
     }
 
     /**
@@ -95,16 +94,16 @@ class MiraklSeller_Shell_Order_Import extends Mage_Shell_Abstract
      */
     public function run()
     {
-        if ($this->getArg('all')) {
-            $this->_importOrdersFromAllConnections();
-        } elseif ($connectionId = $this->getArg('connection')) {
-            try {
+        try {
+            if ($this->getArg('all')) {
+                $this->_importOrdersFromAllConnections();
+            } elseif ($connectionId = $this->getArg('connection')) {
                 $this->_importOrdersFromConnection($connectionId);
-            } catch (Exception $e) {
-                $this->_fault('An error occurred: ' . $e->getMessage());
+            } else {
+                $this->_echo($this->usageHelp());
             }
-        } else {
-            echo $this->usageHelp(); // @codingStandardsIgnoreLine
+        } catch (\Exception $e) {
+            $this->_echo('ERROR: ' . $e->getMessage());
         }
     }
 

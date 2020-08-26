@@ -82,6 +82,11 @@ class MiraklSeller_Process_Model_Process extends Mage_Core_Model_Abstract
     protected $_errorHelper;
 
     /**
+     * @var string
+     */
+    protected $_decodeMethod = 'unserialize';
+
+    /**
      * Initialize model
      */
     protected function _construct()
@@ -89,6 +94,15 @@ class MiraklSeller_Process_Model_Process extends Mage_Core_Model_Abstract
         $this->_init('mirakl_seller_process/process');
         $this->_helper = Mage::helper('mirakl_seller_process');
         $this->_errorHelper = Mage::helper('mirakl_seller_process/error');
+    }
+
+    /**
+     * @param   string  $str
+     * @return  mixed
+     */
+    protected function _decode($str)
+    {
+        return call_user_func($this->_decodeMethod, $str);
     }
 
     /**
@@ -400,7 +414,7 @@ class MiraklSeller_Process_Model_Process extends Mage_Core_Model_Abstract
     {
         $params = $this->_getData('params');
         if (is_string($params)) {
-            $params = unserialize($params); // @codingStandardsIgnoreLine
+            $params = $this->_decode($params);
         }
 
         return is_array($params) ? $params : array();

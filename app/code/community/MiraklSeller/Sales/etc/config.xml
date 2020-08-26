@@ -99,6 +99,15 @@
                     </mirakl_seller_sales>
                 </observers>
             </controller_action_predispatch_adminhtml_sales_order_shipment_save>
+            <sales_order_shipment_save_after>
+                <observers>
+                    <mirakl_seller_sales>
+                        <type>singleton</type>
+                        <class>mirakl_seller_sales/observer_shipment</class>
+                        <method>onShipmentSaveAfter</method>
+                    </mirakl_seller_sales>
+                </observers>
+            </sales_order_shipment_save_after>
             <controller_action_predispatch_adminhtml_sales_order_creditmemo_save>
                 <observers>
                     <mirakl_seller_sales>

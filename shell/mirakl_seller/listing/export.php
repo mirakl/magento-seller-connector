@@ -30,7 +30,7 @@ class MiraklSeller_Shell_Listing_Export extends Mage_Shell_Abstract
     protected function _echo($str)
     {
         if (!$this->_quiet) {
-            echo $str . PHP_EOL; // @codingStandardsIgnoreLine
+            printf('%s%s', $str, PHP_EOL);
         }
     }
 
@@ -39,8 +39,7 @@ class MiraklSeller_Shell_Listing_Export extends Mage_Shell_Abstract
      */
     protected function _fault($str)
     {
-        $this->_echo($str);
-        exit; // @codingStandardsIgnoreLine
+        throw new \Exception($str);
     }
 
     /**
@@ -158,26 +157,20 @@ class MiraklSeller_Shell_Listing_Export extends Mage_Shell_Abstract
      */
     public function run()
     {
-        if ($this->getArg('all')) {
-            $this->_exportAll();
-        } else {
-            if ($listing = $this->getArg('listing')) {
-                try {
-                    $this->_exportListing($listing);
-                } catch (Exception $e) {
-                    $this->_fault('An exception has been thrown: ' . $e->getMessage());
-                }
-
-            } elseif ($connection = $this->getArg('connection')) {
-                try {
-                    $this->_exportConnection($connection);
-                } catch (Exception $e) {
-                    $this->_fault('An exception has been thrown: ' . $e->getMessage());
-                }
-
+        try {
+            if ($this->getArg('all')) {
+                $this->_exportAll();
             } else {
-                $this->_fault('The parameter listing | connection | all is required');
+                if ($listing = $this->getArg('listing')) {
+                    $this->_exportListing($listing);
+                } elseif ($connection = $this->getArg('connection')) {
+                    $this->_exportConnection($connection);
+                } else {
+                    $this->_fault('The parameter listing | connection | all is required');
+                }
             }
+        } catch (\Exception $e) {
+            $this->_echo('ERROR: ' . $e->getMessage());
         }
     }
 

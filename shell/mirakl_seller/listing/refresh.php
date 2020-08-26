@@ -30,7 +30,7 @@ class MiraklSeller_Shell_Listing_Refresh extends Mage_Shell_Abstract
     protected function _echo($str)
     {
         if (!$this->_quiet) {
-            echo $str . PHP_EOL; // @codingStandardsIgnoreLine
+            printf('%s%s', $str, PHP_EOL);
         }
     }
 
@@ -39,8 +39,7 @@ class MiraklSeller_Shell_Listing_Refresh extends Mage_Shell_Abstract
      */
     protected function _fault($str)
     {
-        $this->_echo($str);
-        exit; // @codingStandardsIgnoreLine
+        throw new \Exception($str);
     }
 
     /**
@@ -113,24 +112,19 @@ class MiraklSeller_Shell_Listing_Refresh extends Mage_Shell_Abstract
      */
     public function run()
     {
-        if ($this->getArg('all')) {
-            $this->_refreshAll();
-        } else {
-            if ($listing = $this->getArg('listing')) {
-                try {
+        try {
+            if ($this->getArg('all')) {
+                $this->_refreshAll();
+            } else {
+                if ($listing = $this->getArg('listing')) {
                     $this->_refreshListing($listing);
-                } catch (Exception $e) {
-                    $this->_fault('An exception has been thrown: ' . $e->getMessage());
                 }
-            }
-
-            if ($connection = $this->getArg('connection')) {
-                try {
+                if ($connection = $this->getArg('connection')) {
                     $this->_refreshConnection($connection);
-                } catch (Exception $e) {
-                    $this->_fault('An exception has been thrown: ' . $e->getMessage());
                 }
             }
+        } catch (\Exception $e) {
+            $this->_echo('ERROR: ' . $e->getMessage());
         }
     }
 

@@ -30,7 +30,7 @@ class MiraklSeller_Shell_Tracking_Update extends Mage_Shell_Abstract
     protected function _echo($str)
     {
         if (!$this->_quiet) {
-            echo $str . PHP_EOL; // @codingStandardsIgnoreLine
+            printf('%s%s', $str, PHP_EOL);
         }
     }
 
@@ -39,8 +39,7 @@ class MiraklSeller_Shell_Tracking_Update extends Mage_Shell_Abstract
      */
     protected function _fault($str)
     {
-        $this->_echo($str);
-        exit; // @codingStandardsIgnoreLine
+        throw new \Exception($str);
     }
 
     /**
@@ -132,24 +131,19 @@ class MiraklSeller_Shell_Tracking_Update extends Mage_Shell_Abstract
      */
     public function run()
     {
-        if ($this->getArg('all')) {
-            $this->_updateAllListingTrackings();
-        } else {
-            if ($listing = $this->getArg('listing')) {
-                try {
+        try {
+            if ($this->getArg('all')) {
+                $this->_updateAllListingTrackings();
+            } else {
+                if ($listing = $this->getArg('listing')) {
                     $this->_updateListingTrackings($listing);
-                } catch (Exception $e) {
-                    $this->_fault('An exception has been thrown: ' . $e->getMessage());
                 }
-            }
-
-            if ($connection = $this->getArg('connection')) {
-                try {
+                if ($connection = $this->getArg('connection')) {
                     $this->_updateConnectionListingTrackings($connection);
-                } catch (Exception $e) {
-                    $this->_fault('An exception has been thrown: ' . $e->getMessage());
                 }
             }
+        } catch (\Exception $e) {
+            $this->_echo('ERROR: ' . $e->getMessage());
         }
     }
 
