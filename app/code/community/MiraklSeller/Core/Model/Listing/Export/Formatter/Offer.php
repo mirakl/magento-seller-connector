@@ -98,7 +98,7 @@ class MiraklSeller_Core_Model_Listing_Export_Formatter_Offer
             'internal-description'  => $data['internal_description'],
             'price'                 => isset($data['price']) ? self::formatPrice($data['price'] + $additionalPrice) : '0',
             'price-additional-info' => $data['price_additional_info'],
-            'quantity'              => isset($data['qty']) ? (int) $data['qty'] : '',
+            'quantity'              => isset($data['qty']) ? max(0, (int) $data['qty']) : '',
             'min-quantity-alert'    => $data['min_quantity_alert'],
             'state'                 => $data['state'] ?: MiraklSeller_Core_Model_Offer_State::DEFAULT_STATE,
             'available-start-date'  => self::formatDate($data['available_start_date']),
