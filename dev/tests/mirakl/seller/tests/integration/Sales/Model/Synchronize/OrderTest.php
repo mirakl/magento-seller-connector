@@ -1,7 +1,10 @@
 <?php
 namespace Mirakl\Test\Integration\Sales\Model\Synchronize;
 
+use AspectMock\Test;
 use Mirakl\Aspect\AspectMockTrait;
+use Mirakl\Core\Domain\Collection\MiraklCollection;
+use Mirakl\MMP\Common\Domain\Collection\SeekableCollection;
 use Mirakl\MMP\Common\Domain\Order\OrderState;
 use Mirakl\MMP\Shop\Domain\Order\ShopOrder;
 use Mirakl\Test\Integration\Sales;
@@ -46,7 +49,7 @@ class OrderTest extends Sales\TestCase
         $miraklOrder = ShopOrder::create($miraklOrdersData['orders'][0]);
 
         /** @var \Mage_Sales_Model_Order $magentoOrder */
-        $magentoOrder = $this->createMagentoOrder($miraklOrder);
+        $magentoOrder = $this->createMagentoOrder($miraklOrder, $this->_createSampleConnection());
 
         $this->assertSame(OrderState::SHIPPING, $miraklOrder->getStatus()->getState());
 
@@ -54,6 +57,10 @@ class OrderTest extends Sales\TestCase
         $this->assertEquals(0, $magentoOrder->getShipmentsCollection()->count());
 
         \AspectMock\Test::clean();
+
+        Test::double(\MiraklSeller_Api_Helper_Shipment::class, [
+            'getShipments' => (new SeekableCollection)->setCollection(new MiraklCollection()),
+        ]);
 
         self::mockConfigValues([
             'mirakl_seller_sales/order/auto_create_invoice' => 1,

@@ -1,0 +1,117 @@
+<?php
+/** @var MiraklSeller_Sales_Block_Adminhtml_Sales_Order_View_Thread_View $this */
+/** @var MiraklSeller_Core_Helper_Thread $_threadHelper */
+$_connection = $this->getConnection();
+$_thread = $this->getThread();
+$_threadHelper = $this->helper('mirakl_seller/thread');
+?>
+<div class="entry-edit">
+    <div class="content">
+        <?php if ($_thread): ?>
+            <div class="mirakl-thread">
+                <h2><?php echo $_threadHelper->getThreadTopic($_connection, $_thread) ?></h2>
+                <ul class="thread-messages">
+                    <?php /** @var \Mirakl\MMP\Common\Domain\Message\Thread\ThreadMessage $_message */ ?>
+                    <?php foreach ($_thread->getMessages() as $_message): ?>
+                        <li class="thread-message <?php echo $this->isSellerMessage($_message) ? 'message-right' : 'message-left' ?> <?php echo strtolower($_message->getFrom()->getType()) ?>">
+                            <p class="meta">
+                                <?php echo $this->__('By %s to %s - %s', $this->getSenderName($_message),
+                                    implode(', ', $this->getRecipientNames($_message)),
+                                    $this->formatDate($_message->getDateCreated()->format(\DateTime::ISO8601), 'short', true)) ?>
+                            </p>
+                            <p class="body"><?php echo $this->escapeHtml($_message->getBody(), array('br')) ?></p>
+                            <?php if (!empty($_message->getAttachments())): ?>
+                                <p class="attachment"><?php echo $this->__('Attachments:') ?>
+                                    <?php /** @var \Mirakl\MMP\Common\Domain\Message\Thread\ThreadAttachment $attachment */ ?>
+                                    <?php foreach ($_message->getAttachments() as $attachment): ?>
+                                        <a href="<?php echo $this->getAttachmentUrl($attachment)?>" target="_blank"><?php echo $attachment->getName() ?></a>
+                                    <?php endforeach; ?>
+                                </p>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif ?>
+
+        <?php if ($this->getShowForm()): ?>
+            <div class="thread-form">
+                <h2><?php echo $this->getFormTitle() ?></h2>
+                <form method="post" id="thread-form" action="<?php /* @escapeNotVerified */ echo $this->getFormAction() ?>" class="thread-form" enctype="multipart/form-data">
+                    <input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>" />
+                    <input type="hidden" name="order_id" value="<?php echo $this->getRequest()->getParam('order_id') ?>" />
+                    <input type="hidden" name="connection_id" value="<?php echo $this->getRequest()->getParam('connection_id') ?>" />
+                    <?php if ($_thread): ?>
+                        <input type="hidden" name="thread_id" value="<?php echo $this->getRequest()->getParam('thread_id') ?>" />
+                    <?php endif; ?>
+
+                    <table cellspacing="0" class="form-list">
+                        <tr>
+                            <td class="label">
+                                <label for="message_recipients"><?php echo $this->escapeHtml($this->__('Recipients')) ?>&nbsp;<span class="required">*</span></label>
+                            </td>
+                            <td class="value">
+                                <select name="recipients" id="message_recipients" class="validate-select">
+                                    <option value="">--<?php echo $this->__('Please Select') ?>--</option>
+                                    <?php foreach ($this->getThreadRecipients() as $_type => $_name): ?>
+                                        <option value="<?php echo $_type ?>"><?php echo $this->escapeHtml($_name) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <?php if (!$_thread): ?>
+                            <tr>
+                                <td class="label">
+                                    <label for="message_topic"><?php echo $this->escapeHtml($this->__('Topic')) ?>&nbsp;<span class="required">*</span></label>
+                                </td>
+                                <td class="value">
+                                    <select name="topic" id="message_topic" class="validate-select">
+                                        <option value="">--<?php echo $this->__('Please Select') ?>--</option>
+                                        <?php /** @var \Mirakl\MMP\Shop\Domain\Reason $_reason */ ?>
+                                        <?php foreach ($this->getThreadReasons() as $_reason): ?>
+                                            <option value="<?php echo $_reason->getCode() ?>"><?php echo $_reason->getLabel() ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                        <tr>
+                            <td class="label">
+                                <label for="message_body"><?php echo $this->escapeHtml($this->__('Message')) ?>&nbsp;<span class="required">*</span></label>
+                            </td>
+                            <td class="value">
+                                <textarea name="body" id="message_body" rows="3" cols="5" class="required-entry"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="message_file"><?php echo $this->escapeHtml($this->__('File')) ?></label>
+                            </td>
+                            <td class="value">
+                                <input type="file" name="file" id="message_file" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="value">
+                                <button id="thread-form-btn" type="submit" class="scalable">
+                                    <span><?php echo $this->__('Send Message') ?></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <script type="text/javascript">
+                    //< ![CDATA[
+                    MiraklThreadForm = new varienForm('thread-form');
+                    //]]>
+                </script>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="buttons-set">
+        <div class="f-right">
+            <button type="button" class="scalable back" onclick="MiraklThreads.hideModal()"><span><?php echo $this->__('Close') ?></span></button>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,10 @@
 <?php
 namespace Mirakl\Test\Integration\Sales\Helper;
 
+use AspectMock\Test;
 use Mirakl\Aspect\AspectMockTrait;
+use Mirakl\Core\Domain\Collection\MiraklCollection;
+use Mirakl\MMP\Common\Domain\Collection\SeekableCollection;
 use Mirakl\MMP\Shop\Domain\Order\ShopOrder;
 use Mirakl\Test\Integration\Sales;
 
@@ -31,6 +34,10 @@ class OrderTest extends Sales\TestCase
      */
     public function testCreateOrder()
     {
+        Test::double(\MiraklSeller_Api_Helper_Shipment::class, [
+            'getShipments' => (new SeekableCollection)->setCollection(new MiraklCollection()),
+        ]);
+
         self::mockConfigValues([
             'mirakl_seller_sales/order/auto_create_invoice'  => 1,
             'mirakl_seller_sales/order/auto_create_shipment' => 1,
@@ -44,7 +51,7 @@ class OrderTest extends Sales\TestCase
         $miraklOrdersData = $this->_getJsonFileContents('OR11.json');
         $miraklOrder = ShopOrder::create($miraklOrdersData['orders'][0]);
 
-        $magentoOrder = $this->createMagentoOrder($miraklOrder);
+        $magentoOrder = $this->createMagentoOrder($miraklOrder, $this->_createSampleConnection());
 
         $this->assertSame(\Mage_Sales_Model_Order::STATE_PROCESSING, $magentoOrder->getState());
         $this->assertEquals(1, $magentoOrder->getInvoiceCollection()->count());

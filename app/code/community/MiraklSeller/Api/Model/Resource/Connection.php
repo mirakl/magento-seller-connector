@@ -7,6 +7,7 @@ class MiraklSeller_Api_Model_Resource_Connection extends Mage_Core_Model_Resourc
      */
     protected $_serializableFields = array(
         'exportable_attributes' => array(array(), array()),
+        'carriers_mapping' => array(array(), array()),
     );
 
     /**

@@ -340,3 +340,63 @@ span.dashboard-error > a {
 .mirakl-export-dialog .buttons-set button {
     margin: 0 0 0 5px;
 }
+
+.tab-item-link.marketplace {
+    background: url('../images/mirakl_seller/logo_blue_256px.png') no-repeat 1.5em center;
+    background-size: 20px;
+}
+
+.tab-item-link.marketplace:hover {
+    background-image: url('../images/mirakl_seller/logo_blue_256px.png');
+    box-shadow: inset -6px 0 5px -7px rgba(0, 0, 0, .7);
+}
+
+.tab-item-link.marketplace > span {
+    padding-left: 42px;
+}
+
+.tab-item-link.marketplace.active > span,
+.tab-item-link.marketplace.active:hover > span {
+    background: #fff url('../images/mirakl_seller/logo_blue_256px.png') no-repeat 1.5em center;
+    background-size: 20px;
+}
+
+.thread-messages {
+    margin-bottom: 40px;
+}
+
+.thread-messages li {
+    list-style: none;
+}
+
+.thread-messages .message-left p {
+    margin-right: 40%;
+}
+
+.thread-messages .message-right p {
+    margin-left: 40%;
+    text-align: right;
+}
+
+.thread-messages .meta {
+    color: #999;
+    font-style: italic;
+    margin-top: 30px;
+    margin-bottom: 4px;
+}
+
+.thread-messages p.body {
+    background-color: #fafafa;
+    border: 1px solid #c6c6c6;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.thread-form td.label,
+.thread-form td.label label {
+    width: auto;
+}
+
+#sales_order_view_tabs_mirakl_seller_threads_content .filter {
+    display: none;
+}

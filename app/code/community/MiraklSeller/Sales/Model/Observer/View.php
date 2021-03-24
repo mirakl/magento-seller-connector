@@ -28,7 +28,7 @@ class MiraklSeller_Sales_Model_Observer_View extends MiraklSeller_Sales_Model_Ob
             $miraklOrderUrl = $this->_connectionHelper->getMiraklOrderUrl($connection, $miraklOrder);
 
             if ($updated) {
-                $this->_getSession()->addNotice(
+                $this->_getSession()->addSuccess(
                     $this->__(
                         'Your order <a href="%s" target="_blank">%s</a> has been synchronized with Mirakl.',
                         $miraklOrderUrl,

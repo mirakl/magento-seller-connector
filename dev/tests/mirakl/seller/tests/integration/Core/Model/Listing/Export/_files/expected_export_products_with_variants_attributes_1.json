@@ -53,7 +53,14 @@
         "weight": "1.0000",
         "width": null,
         "entity_id": "267",
-        "sku": "mpd003"
+        "sku": "mpd003",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "268": {
         "image_1": "http://foobar.com/catalog/product/m/p/mpd003t_3.jpg",
@@ -109,7 +116,14 @@
         "weight": "1.0000",
         "width": null,
         "entity_id": "268",
-        "sku": "mpd004"
+        "sku": "mpd004",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": "199.9000"
     },
     "269": {
         "image_1": "http://foobar.com/catalog/product/m/p/mpd003t_4.jpg",
@@ -165,6 +179,13 @@
         "weight": "1.0000",
         "width": null,
         "entity_id": "269",
-        "sku": "mpd005"
+        "sku": "mpd005",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     }
 }

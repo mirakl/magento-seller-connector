@@ -15,7 +15,7 @@ class MiraklSeller_Api_Model_Log_Logger implements \Psr\Log\LoggerInterface
     /**
      * @var array
      */
-    protected $logLevelMapping = [
+    protected $logLevelMapping = array(
         LogLevel::EMERGENCY => Zend_Log::EMERG,
         LogLevel::ALERT     => Zend_Log::ALERT,
         LogLevel::CRITICAL  => Zend_Log::CRIT,
@@ -24,7 +24,7 @@ class MiraklSeller_Api_Model_Log_Logger implements \Psr\Log\LoggerInterface
         LogLevel::NOTICE    => Zend_Log::NOTICE,
         LogLevel::INFO      => Zend_Log::INFO,
         LogLevel::DEBUG     => Zend_Log::DEBUG,
-    ];
+    );
 
     /**
      * {@inheritdoc}

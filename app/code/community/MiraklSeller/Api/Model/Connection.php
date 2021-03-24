@@ -4,6 +4,7 @@
  * @method  $this   setApiUrl(string $apiUrl)
  * @method  string  getApiKey()
  * @method  $this   setApiKey(string $apiKey)
+ * @method  $this   setCarriersMapping(string $carriersMapping)
  * @method  string  getErrorsCode()
  * @method  $this   setErrorsCode(string $errorsCode)
  * @method  string  getExportedPricesAttribute()
@@ -99,6 +100,21 @@ class MiraklSeller_Api_Model_Connection extends Mage_Core_Model_Abstract
         }
 
         return $fields;
+    }
+
+    /**
+     * @return  array
+     */
+    public function getCarriersMapping()
+    {
+        $values = $this->_getData('carriers_mapping');
+        if (empty($values)) {
+            $values = array();
+        } elseif (is_string($values)) {
+            $values = json_decode($values, true);
+        }
+
+        return $values;
     }
 
     /**

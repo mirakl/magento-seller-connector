@@ -1,7 +1,9 @@
 <?php
 
 use Mage_Core_Controller_Varien_Action as Action;
+use Mage_Sales_Model_Order_Shipment_Track as Track;
 use MiraklSeller_Api_Model_Connection as Connection;
+use Mirakl\MMP\Common\Domain\Shipment\Shipment as MiraklShipment;
 use Mirakl\MMP\Shop\Domain\Order\ShopOrder;
 
 abstract class MiraklSeller_Sales_Model_Observer_Abstract
@@ -10,6 +12,11 @@ abstract class MiraklSeller_Sales_Model_Observer_Abstract
      * @var MiraklSeller_Api_Helper_Order
      */
     protected $_apiOrder;
+
+    /**
+     * @var MiraklSeller_Api_Helper_Shipment
+     */
+    protected $_apiShipment;
 
     /**
      * @var MiraklSeller_Sales_Model_Synchronize_Order
@@ -27,6 +34,7 @@ abstract class MiraklSeller_Sales_Model_Observer_Abstract
     public function __construct()
     {
         $this->_apiOrder         = Mage::helper('mirakl_seller_api/order');
+        $this->_apiShipment      = Mage::helper('mirakl_seller_api/shipment');
         $this->_synchronizeOrder = Mage::getModel('mirakl_seller_sales/synchronize_order');
         $this->_connectionHelper = Mage::helper('mirakl_seller/connection');
     }
@@ -43,11 +51,35 @@ abstract class MiraklSeller_Sales_Model_Observer_Abstract
      * Retrieves Mirakl connection by id
      *
      * @param   int $connectionId
-     * @return  MiraklSeller_Api_Model_Connection
+     * @return  Connection
      */
     protected function _getConnectionById($connectionId)
     {
         return Mage::getModel('mirakl_seller_api/connection')->load($connectionId);
+    }
+
+    /**
+     * @param   Connection  $connection
+     * @param   string      $miraklOrderId
+     * @param   string      $miraklShipmentId
+     * @return  MiraklShipment
+     * @throws  \Exception
+     */
+    protected function _getMiraklShipment(Connection $connection, $miraklOrderId, $miraklShipmentId)
+    {
+        $shipments = $this->_apiShipment->getShipments($connection, array($miraklOrderId));
+
+        /** @var MiraklShipment $shipment */
+        foreach ($shipments->getCollection() as $shipment) {
+            if ($shipment->getId() === $miraklShipmentId) {
+                return $shipment;
+            }
+        }
+
+        $this->_fail($this->__(
+            "Could not find Mirakl order shipment for id '%s' with order '%s' and connection '%s'.",
+            $miraklShipmentId, $miraklOrderId, $connection->getId()
+        ));
     }
 
     /**
@@ -88,6 +120,39 @@ abstract class MiraklSeller_Sales_Model_Observer_Abstract
         $order   = Mage::getModel('sales/order')->load($orderId);
 
         return $this->_isImportedMiraklOrder($order) ? $order : null;
+    }
+
+    /**
+     * Returns order total quantity to ship
+     *
+     * @param   Mage_Sales_Model_Order  $order
+     * @return  int
+     */
+    protected function _getOrderQtyToShip($order)
+    {
+        $qtyToShip = 0;
+        /** @var Mage_Sales_Model_Order_Item $item */
+        foreach ($order->getAllVisibleItems() as $item) {
+            $qtyToShip += $item->getQtyToShip();
+        }
+
+        return $qtyToShip;
+    }
+
+    /**
+     * @param   Connection  $connection
+     * @param   Track       $track
+     * @return  string
+     */
+    public function getMiraklCarrierCode(Connection $connection, Track $track)
+    {
+        $mapping = $connection->getCarriersMapping();
+
+        if (isset($mapping[$track->getCarrierCode()])) {
+            return $mapping[$track->getCarrierCode()];
+        }
+
+        return '';
     }
 
     /**

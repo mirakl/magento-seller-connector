@@ -32,12 +32,19 @@ class MiraklSeller_Sales_Helper_Order extends Mage_Core_Helper_Abstract
      * Converts a Mirakl order into a Magento order
      *
      * @param   ShopOrder   $miraklOrder
-     * @param   mixed       $store
+     * @param   Connection  $connection
      * @return  Mage_Sales_Model_Order
      */
-    public function createOrder(ShopOrder $miraklOrder, $store = null)
+    public function createOrder(ShopOrder $miraklOrder, Connection $connection)
     {
-        $order = Mage::getModel('mirakl_seller_sales/create_order')->create($miraklOrder, $store);
+        /** @var Mage_Sales_Model_Order $order */
+        $order = Mage::getModel('mirakl_seller_sales/create_order')->create($miraklOrder, $connection->getStoreId());
+
+        // Save some Mirakl information to be able to associate actions on it later
+        $order->setMiraklConnectionId($connection->getId());
+        $order->setMiraklOrderId($miraklOrder->getId());
+
+        $order->getResource()->saveAttribute($order, array('mirakl_connection_id', 'mirakl_order_id'));
 
         $config = Mage::helper('mirakl_seller_sales/config');
 
@@ -45,8 +52,8 @@ class MiraklSeller_Sales_Helper_Order extends Mage_Core_Helper_Abstract
             Mage::getModel('mirakl_seller_sales/create_invoice')->create($order);
         }
 
-        if ($config->isAutoCreateShipment() && $this->isMiraklOrderShipped($miraklOrder)) {
-            Mage::getModel('mirakl_seller_sales/create_shipment')->create($order, $miraklOrder);
+        if ($config->isAutoCreateShipment()) {
+            Mage::getModel('mirakl_seller_sales/synchronize_shipments')->synchronize($order, $miraklOrder);
         }
 
         return $order;
@@ -202,12 +209,7 @@ class MiraklSeller_Sales_Helper_Order extends Mage_Core_Helper_Abstract
         }
 
         // Create the Magento order
-        $order = $this->createOrder($miraklOrder, $connection->getStoreId());
-
-        // Save some Mirakl information to be able to associate actions on it later
-        $order->setMiraklConnectionId($connection->getId());
-        $order->setMiraklOrderId($miraklOrder->getId());
-        $order->save();
+        $order = $this->createOrder($miraklOrder, $connection);
 
         return $order;
     }

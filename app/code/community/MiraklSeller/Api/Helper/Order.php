@@ -1,8 +1,12 @@
 <?php
 
+use Mirakl\Core\Domain\FileWrapper;
 use Mirakl\MMP\Common\Domain\Collection\Message\OrderMessageCollection;
 use Mirakl\MMP\Common\Domain\Message\MessageCreated;
+use Mirakl\MMP\Common\Domain\Message\Thread\ThreadCreated;
+use Mirakl\MMP\Common\Domain\Order\Message\CreateOrderThread;
 use Mirakl\MMP\Common\Domain\UserType;
+use Mirakl\MMP\Common\Request\Order\Message\CreateOrderThreadRequest;
 use Mirakl\MMP\Shop\Domain\Collection\Order\ShopOrderCollection;
 use Mirakl\MMP\Shop\Domain\Order\ShopOrder;
 use Mirakl\MMP\Shop\Request\Order\Accept\AcceptOrderRequest;
@@ -16,6 +20,35 @@ use MiraklSeller_Api_Model_Connection as Connection;
 
 class MiraklSeller_Api_Helper_Order extends MiraklSeller_Api_Helper_Client_MMP
 {
+    /**
+     * (OR43) Create a thread on an order
+     *
+     * @param   Connection          $connection
+     * @param   ShopOrder           $miraklOrder
+     * @param   CreateOrderThread   $thread
+     * @param   FileWrapper[]       $files
+     * @return  ThreadCreated
+     */
+    public function createOrderThread(
+        Connection $connection,
+        ShopOrder $miraklOrder,
+        CreateOrderThread $thread,
+        $files = array()
+    ) {
+        $request = new CreateOrderThreadRequest($miraklOrder->getId(), $thread);
+
+        if (count($files)) {
+            $request->setFiles($files);
+        }
+
+        Mage::dispatchEvent('mirakl_seller_api_create_order_thread_before', array(
+            'request'      => $request,
+            'mirakl_order' => $miraklOrder,
+        ));
+
+        return $this->send($connection, $request);
+    }
+
     /**
      * (OR11) Fetches all Mirakl orders from specified connection
      *

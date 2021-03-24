@@ -31,13 +31,19 @@ class MiraklSeller_Sales_Model_Synchronize_Order
      */
     protected $_synchronizeRefunds;
 
+    /**
+     * @var MiraklSeller_Sales_Model_Synchronize_Shipments
+     */
+    protected $_synchronizeShipments;
+
     public function __construct()
     {
-        $this->_createInvoice      = Mage::getModel('mirakl_seller_sales/create_invoice');
-        $this->_createShipment     = Mage::getModel('mirakl_seller_sales/create_shipment');
-        $this->_synchronizeRefunds = Mage::getModel('mirakl_seller_sales/synchronize_refunds');
-        $this->_config             = Mage::helper('mirakl_seller_sales/config');
-        $this->_orderHelper        = Mage::helper('mirakl_seller_sales/order');
+        $this->_createInvoice        = Mage::getModel('mirakl_seller_sales/create_invoice');
+        $this->_createShipment       = Mage::getModel('mirakl_seller_sales/create_shipment');
+        $this->_synchronizeRefunds   = Mage::getModel('mirakl_seller_sales/synchronize_refunds');
+        $this->_synchronizeShipments = Mage::getModel('mirakl_seller_sales/synchronize_shipments');
+        $this->_config               = Mage::helper('mirakl_seller_sales/config');
+        $this->_orderHelper          = Mage::helper('mirakl_seller_sales/order');
     }
 
     /**
@@ -55,8 +61,6 @@ class MiraklSeller_Sales_Model_Synchronize_Order
         $miraklState  = $miraklOrder->getStatus()->getState();
         $hasInvoice   = $magentoOrder->getInvoiceCollection()->count();
         $canInvoice   = !$hasInvoice && $this->_config->isAutoCreateInvoice();
-        $hasShipment  = $magentoOrder->getShipmentsCollection()->count();
-        $canShip      = !$hasShipment && $this->_config->isAutoCreateShipment();
 
         // Cancel Magento order if Mirakl order is canceled
         if ($miraklState == OrderState::CANCELED && !$magentoOrder->isCanceled()) {
@@ -76,17 +80,16 @@ class MiraklSeller_Sales_Model_Synchronize_Order
             $this->_createInvoice->create($magentoOrder);
         }
 
-        // Create Magento shipment if Mirakl order has been shipped
-        if ($canShip && $this->_orderHelper->isMiraklOrderShipped($miraklOrder)) {
-            $updated = true;
-            $this->_createShipment->create($magentoOrder, $miraklOrder);
+        // Synchronize Mirakl shipments with Magento order
+        if ($this->_config->isAutoCreateShipment()) {
+            $updated = ($updated | $this->_synchronizeShipments->synchronize($magentoOrder, $miraklOrder));
         }
 
         // Synchronize Mirakl refunds with Magento order
         if ($this->_config->isAutoCreateRefunds()) {
-            $this->_synchronizeRefunds->synchronize($magentoOrder, $miraklOrder);
+            $updated = ($updated | $this->_synchronizeRefunds->synchronize($magentoOrder, $miraklOrder));
         }
 
-        return $updated;
+        return (bool) $updated;
     }
 }

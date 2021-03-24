@@ -5,7 +5,7 @@
     "version": "1.2.4",
     "license": "proprietary",
     "require": {
-        "mirakl/sdk-php-shop": "~1.9",
+        "mirakl/sdk-php-shop": "~1.12.1",
         "psr/log": "~1.0"
     }
 }

@@ -72,8 +72,14 @@ class MiraklSeller_Core_Model_Listing_Export_Offers extends MiraklSeller_Core_Mo
             /** @var MiraklSeller_Core_Model_Resource_Product_Collection $collection */
             $collection = Mage::getResourceModel('mirakl_seller/product_collection');
             $collection->addFieldToSelect('sku')
+                ->addAttributeToSelect('price')
                 ->setStore($listing->getStoreId())
                 ->addIdFilter($deleteIds);
+
+            // Add attribute corresponding to product-id if not setup as sku
+            if (($productIdValueAttribute = $listing->getProductIdValueAttribute()) != 'sku') {
+                $collection->addAttributeToSelect($productIdValueAttribute);
+            }
 
             foreach ($collection as $product) {
                 $productId = $product['entity_id'];

@@ -53,7 +53,14 @@
         "weight": "0.5000",
         "width": null,
         "entity_id": "547",
-        "sku": "acj00118"
+        "sku": "acj00118",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "548": {
         "image_1": "http:\/\/foobar.com\/catalog\/product\/a\/c\/acj001_1_4.jpg",
@@ -109,7 +116,14 @@
         "weight": "0.5000",
         "width": null,
         "entity_id": "548",
-        "sku": "acj00124"
+        "sku": "acj00124",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "549": {
         "image_1": "http:\/\/foobar.com\/catalog\/product\/a\/c\/acj006_2.jpg",
@@ -165,7 +179,14 @@
         "weight": "0.2500",
         "width": null,
         "entity_id": "549",
-        "sku": "acj0006s"
+        "sku": "acj0006s",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "551": {
         "image_1": "http:\/\/foobar.com\/catalog\/product\/a\/c\/acj003_2.jpg",
@@ -221,7 +242,14 @@
         "weight": "0.2500",
         "width": null,
         "entity_id": "551",
-        "sku": "acj003"
+        "sku": "acj003",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "552": {
         "image_1": "http:\/\/foobar.com\/catalog\/product\/a\/c\/acj004_2.jpg",
@@ -277,7 +305,14 @@
         "weight": "0.5000",
         "width": null,
         "entity_id": "552",
-        "sku": "acj004"
+        "sku": "acj004",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "553": {
         "image_1": "http:\/\/foobar.com\/catalog\/product\/a\/c\/acj000_2.jpg",
@@ -333,7 +368,14 @@
         "weight": "1.0000",
         "width": null,
         "entity_id": "553",
-        "sku": "acj000"
+        "sku": "acj000",
+        "msrp_enabled": "1",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "554": {
         "image_1": "http:\/\/foobar.com\/catalog\/product\/a\/c\/acj005_2.jpg",
@@ -389,6 +431,13 @@
         "weight": "1.2500",
         "width": null,
         "entity_id": "554",
-        "sku": "acj005"
+        "sku": "acj005",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     }
 }

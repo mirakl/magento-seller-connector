@@ -2,7 +2,7 @@
 <config>
     <modules>
         <MiraklSeller_Api>
-            <version>0.11.0</version>
+            <version>0.12.0</version>
         </MiraklSeller_Api>
     </modules>
     <global>

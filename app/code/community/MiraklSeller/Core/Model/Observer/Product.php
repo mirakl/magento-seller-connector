@@ -101,7 +101,7 @@ class MiraklSeller_Core_Model_Observer_Product
     {
         try {
             // Do not try to delete a product twice
-            static $deletedProductIds = [];
+            static $deletedProductIds = array();
 
             $productIds = array_diff($productIds, $deletedProductIds);
             $deletedProductIds = array_merge($deletedProductIds, $productIds);

@@ -18,10 +18,11 @@ class MiraklSeller_Api_Helper_Offer extends MiraklSeller_Api_Helper_Client_MMP
      * @param   Connection  $connection
      * @param   array       $data
      * @param   string      $importMode
+     * @param   bool        $withProducts
      * @return  OfferProductImportTracking
      * @throws  LogicException
      */
-    public function importOffers(Connection $connection, array $data, $importMode = ImportMode::NORMAL)
+    public function importOffers(Connection $connection, array $data, $importMode = ImportMode::NORMAL, $withProducts = false)
     {
         if (empty($data)) {
             throw new LogicException('No offer to import');
@@ -34,7 +35,7 @@ class MiraklSeller_Api_Helper_Offer extends MiraklSeller_Api_Helper_Client_MMP
         $file = \Mirakl\create_temp_csv_file($data);
         $request = new OfferImportRequest($file);
         $request->setImportMode($importMode);
-        $request->setWithProducts(in_array('product-sku', $cols));
+        $request->setWithProducts($withProducts);
         $request->setFileName('MGT-OF01-' . time() . '.csv');
 
         Mage::dispatchEvent('mirakl_seller_api_import_offers_before', array('request' => $request));

@@ -2,7 +2,7 @@
 <config>
     <modules>
         <MiraklSeller_Sales>
-            <version>1.1.0</version>
+            <version>1.2.0</version>
         </MiraklSeller_Sales>
     </modules>
     <global>
@@ -90,7 +90,7 @@
                     </mirakl_seller_sales>
                 </observers>
             </controller_action_predispatch_adminhtml_sales_order_invoice_save>
-            <controller_action_predispatch_adminhtml_sales_order_shipment_save>
+            <sales_order_shipment_save_before>
                 <observers>
                     <mirakl_seller_sales>
                         <type>singleton</type>
@@ -98,16 +98,16 @@
                         <method>onSaveShipmentBefore</method>
                     </mirakl_seller_sales>
                 </observers>
-            </controller_action_predispatch_adminhtml_sales_order_shipment_save>
-            <sales_order_shipment_save_after>
+            </sales_order_shipment_save_before>
+            <sales_order_shipment_track_save_before>
                 <observers>
                     <mirakl_seller_sales>
                         <type>singleton</type>
                         <class>mirakl_seller_sales/observer_shipment</class>
-                        <method>onShipmentSaveAfter</method>
+                        <method>onSaveShipmentTrackBefore</method>
                     </mirakl_seller_sales>
                 </observers>
-            </sales_order_shipment_save_after>
+            </sales_order_shipment_track_save_before>
             <controller_action_predispatch_adminhtml_sales_order_creditmemo_save>
                 <observers>
                     <mirakl_seller_sales>
@@ -135,15 +135,6 @@
                     </mirakl_seller_sales>
                 </observers>
             </controller_action_predispatch_adminhtml_sales_order_edit_start>
-            <controller_action_predispatch_adminhtml_sales_order_addComment>
-                <observers>
-                    <mirakl_seller_sales>
-                        <type>singleton</type>
-                        <class>mirakl_seller_sales/observer_comment</class>
-                        <method>onAddCommentBefore</method>
-                    </mirakl_seller_sales>
-                </observers>
-            </controller_action_predispatch_adminhtml_sales_order_addComment>
             <controller_action_predispatch_adminhtml_sales_order_view>
                 <observers>
                     <mirakl_seller_sales>

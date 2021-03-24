@@ -13,8 +13,7 @@ class MiraklSeller_Core_Model_Resource_Product
      * @var array
      */
     protected $_excludedAttributesRegexpArray = array(
-        'custom_layout',
-        'custom_layout_update',
+        'custom_layout.*',
         'options_container',
         'custom_design.*',
         'page_layout',
@@ -23,11 +22,11 @@ class MiraklSeller_Core_Model_Resource_Product
         'recurring_profile',
         'tier_price',
         'group_price',
-        'msrp.*',
         'price.*',
         'status',
         'visibility',
         'url_key',
+        'special_price',
         'special_from_date',
         'special_to_date',
     );
@@ -37,7 +36,7 @@ class MiraklSeller_Core_Model_Resource_Product
      *
      * @var array
      */
-    protected $_excludedTypes = array('price', 'gallery', 'hidden', 'multiline', 'media_image');
+    protected $_excludedTypes = array('gallery', 'hidden', 'multiline', 'media_image');
 
     /**
      * Retrieves exportable product attributes

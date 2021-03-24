@@ -41,10 +41,10 @@ class MiraklSeller_Core_Model_Listing_Export_Formatter_Offer
 
         $dataPromotion = $this->computePromotion(
             $data['price'] + $additionalPrice,
-            $data['final_price'] + $additionalPrice,
-            $data['special_price'] + $additionalPrice,
-            $data['special_from_date'],
-            $data['special_to_date']
+            (isset($data['final_price']) ? $data['final_price'] : $data['price']) + $additionalPrice,
+            (isset($data['special_price']) ? $data['special_price'] : 0) + $additionalPrice,
+            isset($data['special_from_date']) ? $data['special_from_date'] : '',
+            isset($data['special_to_date']) ? $data['special_to_date'] : ''
         );
 
         foreach ($this->_config->getOfferFieldsMapping() as $key => $value) {

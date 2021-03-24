@@ -44,7 +44,7 @@ class RefundsTest extends Sales\TestCase
         $miraklOrdersData = $this->_getJsonFileContents('OR11.json');
         $miraklOrder = ShopOrder::create($miraklOrdersData['orders'][0]);
 
-        $magentoOrder = $this->createMagentoOrder($miraklOrder);
+        $magentoOrder = $this->createMagentoOrder($miraklOrder, $this->_createSampleConnection());
 
         $this->assertTrue($magentoOrder->canCreditmemo());
 

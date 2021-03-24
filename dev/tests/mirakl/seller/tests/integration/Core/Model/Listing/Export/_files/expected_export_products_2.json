@@ -53,7 +53,14 @@
         "weight": "1.0000",
         "width": "M",
         "entity_id": "340",
-        "sku": "aws000"
+        "sku": "aws000",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "341": {
         "image_1": "http://foobar.com/catalog/product/a/w/aws000a_1.jpg",
@@ -109,7 +116,14 @@
         "weight": "1.0000",
         "width": "M",
         "entity_id": "341",
-        "sku": "aws001"
+        "sku": "aws001",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "342": {
         "image_1": "http://foobar.com/catalog/product/a/w/aws000a_1.jpg",
@@ -165,7 +179,14 @@
         "weight": "1.0000",
         "width": "M",
         "entity_id": "342",
-        "sku": "aws002"
+        "sku": "aws002",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "343": {
         "image_1": "http://foobar.com/catalog/product/a/w/aws000a_1.jpg",
@@ -221,7 +242,14 @@
         "weight": "1.0000",
         "width": "M",
         "entity_id": "343",
-        "sku": "aws003"
+        "sku": "aws003",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     },
     "344": {
         "image_1": "http://foobar.com/catalog/product/a/w/aws000a_1.jpg",
@@ -277,6 +305,13 @@
         "weight": "1.0000",
         "width": "M",
         "entity_id": "344",
-        "sku": "aws004"
+        "sku": "aws004",
+        "msrp_enabled": "2",
+        "cost": null,
+        "msrp_display_actual_price_type": "4",
+        "msrp": null,
+        "open_amount_max": null,
+        "open_amount_min": null,
+        "gift_wrapping_price": null
     }
 }

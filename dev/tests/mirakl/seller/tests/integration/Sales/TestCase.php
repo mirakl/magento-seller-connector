@@ -4,7 +4,7 @@ namespace Mirakl\Test\Integration\Sales;
 use AspectMock\Test;
 use Mirakl\MMP\Shop\Domain\Order\ShopOrder;
 
-abstract class TestCase extends \Mirakl\Test\Integration\TestCase
+abstract class TestCase extends \Mirakl\Test\Integration\Core\TestCase
 {
     /**
      * @var \MiraklSeller_Sales_Helper_Order
@@ -36,9 +36,9 @@ abstract class TestCase extends \Mirakl\Test\Integration\TestCase
      * @param   ShopOrder   $miraklOrder
      * @return  \Mage_Sales_Model_Order
      */
-    protected function createMagentoOrder(ShopOrder $miraklOrder)
+    protected function createMagentoOrder(ShopOrder $miraklOrder, \MiraklSeller_Api_Model_Connection $connection)
     {
-        $magentoOrder = $this->_orderHelper->createOrder($miraklOrder);
+        $magentoOrder = $this->_orderHelper->createOrder($miraklOrder, $connection);
         $this->_createdOrderIds[] = $magentoOrder->getId();
 
         return $magentoOrder;
