@@ -2,7 +2,7 @@
 <config>
     <modules>
         <MiraklSeller_Core>
-            <version>1.3.0</version>
+            <version>1.3.1</version>
         </MiraklSeller_Core>
     </modules>
     <global>

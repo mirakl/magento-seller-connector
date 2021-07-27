@@ -107,7 +107,6 @@ class MiraklSeller_Core_Adminhtml_Mirakl_Seller_ListingController extends Mage_A
                 ->setHeader('Pragma', 'public', true)
                 ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true)
                 ->setHeader('Content-type', 'application/octet-stream', true)
-                ->setHeader('Content-Length', strlen($contents))
                 ->setHeader('Content-Disposition', 'attachment; filename=' . $fileName);
 
             $this->getResponse()->clearBody();

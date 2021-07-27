@@ -126,7 +126,6 @@ class MiraklSeller_Sales_Adminhtml_Mirakl_Seller_ThreadController extends Mage_A
                 ->setHeader('Pragma', 'public', true)
                 ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true)
                 ->setHeader('Content-type', 'application/octet-stream', true)
-                ->setHeader('Content-Length', $contentSize)
                 ->setHeader('Content-Disposition', 'attachment; filename=' . $document->getFileName());
 
             $this->getResponse()->clearBody();
