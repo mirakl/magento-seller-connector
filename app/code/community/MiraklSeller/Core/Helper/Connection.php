@@ -28,7 +28,7 @@ class MiraklSeller_Core_Helper_Connection extends Mage_Core_Helper_Data
     public function getMiraklOrderUrl(Connection $connection, MiraklOrder $miraklOrder)
     {
         $url = sprintf(
-            '%s/mmp/shop/order/%s/information',
+            '%s/mmp/shop/order/%s',
             $connection->getBaseUrl(),
             $miraklOrder->getId()
         );
